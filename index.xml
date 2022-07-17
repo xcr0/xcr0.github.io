@@ -7,33 +7,86 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title></title>
+      <title>About</title>
       <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
-      <description></description>
-      <content></content>
+      <description>Hi I&amp;rsquo;m xcr0. My interests include programming, compiler development, theoretical computer science, vulnerability research, reverse engineering, and ctf.
+You can find me via any of the contacts listed below.
+Keybase Github Twitter PGP: CC142B6F68880A9458136676D3DCCFFC5ED57822 </description>
+      <content>&lt;p&gt;Hi I&amp;rsquo;m xcr0. My interests include programming, compiler development, theoretical computer science,
+vulnerability research, reverse engineering, and ctf.&lt;/p&gt;
+&lt;p&gt;You can find me via any of the contacts listed below.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://keybase.io/xcr0/&#34;&gt;Keybase&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/xcr0/&#34;&gt;Github&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://twitter.com/extcr0/&#34;&gt;Twitter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/pgp&#34;&gt;PGP: CC142B6F68880A9458136676D3DCCFFC5ED57822&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
     </item>
     
     <item>
-      <title></title>
-      <link>/categories/</link>
+      <title>PGP: CC142B6F68880A9458136676D3DCCFFC5ED57822</title>
+      <link>/pgp/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/categories/</guid>
-      <description></description>
-      <content></content>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/showcase/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/showcase/</guid>
-      <description></description>
-      <content></content>
+      <guid>/pgp/</guid>
+      <description>-----BEGIN PGP PUBLIC KEY BLOCK----- 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 yA== =2bi3 -----END PGP PUBLIC KEY BLOCK----- </description>
+      <content>&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-----BEGIN PGP PUBLIC KEY BLOCK-----
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mQINBGLT/VMBEADrCut6vfdgQXh2DDVDXj7PM97qyEtS0U9wknXPNFWoXXM5eKUx
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8r9dwgvNGkTPHKkPlFKocT6eJkOUqqL3crufCsjniYKhneE22y7R2znCup3RbNWj
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C56UxkSaEESa2ONOsklLiqZg4fRSIxBHWAlCvY300cgApVr57lcCcx1fBcrAOI2v
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;MMBdVLIhgwe70AxB/HRJsZGkFI6qucusM13QmlPviOOrjM2sYod9bBsq7D+x2cfC
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kWQsXG/oKZd5EifUuKu4rOqPC51OvfeCFJ/i1oIllTVuHq9O6QcbYhksPF6KFMgY
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;jmgP3Us/vXfBPD822hVTq9Zav0calVKNLEuAgUaePZYeuxtzh1kdyRZlEiikNeNT
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1LFXi4QMKqXRvtUNcfThgKMdI0BomC7H93AggDkTk0fkHjOymN/WBhbSdL4dCKsm
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A9R9GeGtwKT4NdBjBWG3yv3pxOihUxWq7XER/heR37Qid9NfJlEj5Yrcw4f1wFms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1m0auY+EQGdy9yB61AIAqNR7AWP/k8yGH2DbfBpdAw6QMHMFazXwK3MS9bjkFQM+
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;RcBXOVQoLjR3vp6r8lMPR6mxGh1a1lgiOFd4lLtXyfYEGL6N7C+qwcIqUncwzy3i
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2YNantwZhqRPLI7zwwJ8o+aTqjbeU1+zScgJPlYAyYtfBdZmHiboFT6dQwARAQAB
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tCVleHRjcjAgKHhjcjApIDxleHRjcjBAcHJvdG9ubWFpbC5jb20+iQJOBBMBCAA4
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;FiEEzBQrb2iICpRYE2Z209zP/F7VeCIFAmLT/VMCGwMFCwkIBwIGFQoJCAsCBBYC
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;AwECHgECF4AACgkQ09zP/F7VeCLWCQ//YE+Jp2f64wrHoFvwklG+fXHq1/Wj8i3F
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;14iu7RA+BDiuWsnihSNcKEV9FY7+5u8Mor7FulfVUMQGPC7/JWUsW20iaM3/+Kna
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/t1l6+OMrslP2OZvxSwy4UFE2kJS33KyzxwIoTM94r/tgaG0K/155Ku1Js3HpMd1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bhvyBE7NWN3ugjUsvEerwmRxmGNF6kxqf7f839batRZAP3HWGTOlB0/9F6Mgvcck
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2drRr3q0CUFESqXv/RjWkh4t/Fax6IMsBYpK/l2h+Kr5lZkuQxSaPNsMPKswx1mo
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ggdxD4ALuZLqW0rAs0NbW0+LsAYLGzcyzSpy/AeIvc9sIjAzMak98lTt7o5QNGv2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ihm3kg9BUPW/624HhFWYJZaK8AkATRZ4wfLcAUDf5i9MxXy5YA/5KK3rxCmiQnA6
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2gqL1TYg+D16KBvdOTuS42EkcmmAV1ymhYSbOLZdZ6otB3qzOcJ1ZJnLBd3Tqp0K
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;scrTUUm2p6Ggc+B75S42ICGcEOfhe72IrrKqkB1mnfBxXUQkuW9H/qNkcRcIkBOQ
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gy8YDYutcJ35eCfZr3kuub0JTXscEq3xBOvK690U8/Xlm4L5/L0Y3k+CR7Gf9EJw
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;E8j8GR5YitAj8pv+/XxealJsBUX3d6BqY8ni5R94ROsjHUL7GJWHYVffEXTu+Q1u
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pDvCs8ZzkcK5Ag0EYtP9UwEQAM2QTVlnP8VrfFVUkSLhTkib0GwUiFpraNUiQlca
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;HusPoCVVhZVZ13ILi8vzsHkfaaZM/w2gmGKQph2yFE3w4k+g+qwt1JPVew4sG6o+
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;WvJLV3aPuOxEmhv9eKpaRc+ATbaGsSZnv2lLucCkmgj//8DlM6ShXx80AJGSm9/8
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;c40dQ5ltOYsJ3N/g+/s/eTF6n2PMTWUgdXhH2dbqAC/pfjkp5jWDFHbbNte1DF1T
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;XzYBS43qyUqFRx/XAgLgqkzZgqJ0YStLrxVcyOW1feKN9zyZ+9c3Mw7EA0eVPPqU
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cngqMBEukdfQMpbaNKxjbYPOVTzptY5rGifVQe9Hx//2pewUMmn5is1oje6EHQ+q
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;q+7hMc8QnIItTwiPy/Pf3OhFodWjTmE4tUf9Xd16Y7kRsoEH4udFwYFj0+aY3LFZ
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8MJK1AZfyHkutsjqs9qq/dOblbu44fbhbiHufwGnw6pAex3PKCZcPrOy5aGJkfTB
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PFaXPQdajK2TvDA6P5+j7AdxO5T2vogT5NnQYIws8+QpFnjDOJn6y4LC4T6+QyG1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bu+o6sPCVuGgoXdQf6L5jq6JXZGInSltxolXL6MBGsgw1d3i7m5Q8yOnplcMcxPy
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;FIzAzEbFNg/hk+s2TqB5p23YQNKLoDXK7/Pm6K04eLwTrIxLx1+8CgYU6gMKuLJc
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gyjlABEBAAGJAjYEGAEIACAWIQTMFCtvaIgKlFgTZnbT3M/8XtV4IgUCYtP9UwIb
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;DAAKCRDT3M/8XtV4IlWZD/9vHjPMSUldDYhi9QfjbORcmr/+qlEJHAoeniWIhmvU
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Dp1E2qbVSwsibl9MKj4mqSHQeT6xdB5JLO4qKhD0VBMIwhUtS/yepBDcOzrPRfvQ
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PewMxa3bRR+edwoznGvY/y8hx4p7sQShsJdnVneZWHLgvMINYvZt16dyC2na7uBN
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;IuEvBKXcbcGW+/itouDRkEyl8dAkjB1/M98ldB3doBL+KEWNsQGyN/1k811JrQG1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;zSyi2CoQJPx90/nH9+mlixRt366tSv0P7sRswoRT/tjMuhxeKxgi7MXS5zbhtRpW
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;3lNFMf24M9K6A4elF4ET/VF1CtnWTlQGMUOb+8UcFAV3/bx/VJ+R/+iNWIeFuoYY
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bk0vN7ZeqTwIFPKyREy/utQENrox0rOojEjKSqDFcTEMu1/+AK1v86RTKnDnYPNX
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;L71K6tVstx3DopkW3yWoNjQLEVuRZuxB8M4hvP3ossBhRxNJiLEVUMFbNTNR7gbB
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ntDRoHd5A6uHPUV66KgDwWelMVLaPI3D/koFz2Si4AifzuR8KWysfL6p0DZbvv30
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kD0wai2eurURTi0vzFOyJefglSHwJlWnFhEB+Nz7dPtUw6CdtGrU0794T+NVyNqg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;DBSj8LLCdDUShNd3pHQ18YGyqi2xXVFleY7VuwD0O2woTv6LransWJEaSA+SPJXZ
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yA==
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;=2bi3
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-----END PGP PUBLIC KEY BLOCK-----
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
     </item>
     
     <item>
