@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/about/</loc>
+    <loc>https://xcr0.github.io/about/</loc>
   </url><url>
-    <loc>/categories/</loc>
+    <loc>https://xcr0.github.io/categories/</loc>
   </url><url>
-    <loc>/pgp/</loc>
+    <loc>https://xcr0.github.io/pgp/</loc>
   </url><url>
-    <loc>/posts/</loc>
+    <loc>https://xcr0.github.io/posts/</loc>
   </url><url>
-    <loc>/tags/</loc>
+    <loc>https://xcr0.github.io/tags/</loc>
   </url><url>
-    <loc>/posts/welcome/</loc>
+    <loc>https://xcr0.github.io/posts/welcome/</loc>
   </url><url>
-    <loc>/</loc>
+    <loc>https://xcr0.github.io/</loc>
   </url>
 </urlset>
