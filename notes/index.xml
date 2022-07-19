@@ -162,6 +162,7 @@ a function that contains no free variables.&lt;/p&gt;
 &lt;h2 id=&#34;subtyping&#34;&gt;subtyping&lt;/h2&gt;
 &lt;h2 id=&#34;recursive-typing&#34;&gt;recursive typing&lt;/h2&gt;
 &lt;h2 id=&#34;system-f-and-polymorphism&#34;&gt;system F and polymorphism&lt;/h2&gt;
+&lt;h3 id=&#34;godels-incompleteness-theorem&#34;&gt;godels incompleteness theorem&lt;/h3&gt;
 &lt;h2 id=&#34;the-hindley-milner-type-system&#34;&gt;the hindley milner type system&lt;/h2&gt;
 &lt;h2 id=&#34;hindley-milner-type-inference&#34;&gt;hindley milner type inference&lt;/h2&gt;
 &lt;p&gt;now we are treading into the territory of compiler frontend development with the type inference algorithm
@@ -268,7 +269,7 @@ types; as opposed to allowing the compiler to perform implicit type casts.&lt;/l
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;static analysis is much more useful within a strongly typed languages as the analyzer knows each
-  type of each operand within an expression.&lt;/li&gt;
+type of each operand within an expression.&lt;/li&gt;
 &lt;li&gt;eliminates an entire class of bugs/vulnerabilities that are present within weakly typed language,
 such as type confusion and insecurity.&lt;/li&gt;
 &lt;/ul&gt;
@@ -302,16 +303,16 @@ ad-hoc/bounded polymorphism&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;pythons-type-checking-system&#34;&gt;python&amp;rsquo;s type checking system&lt;/h2&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;conclusion&lt;/h2&gt;
-&lt;p&gt;welp thats it for my notes on lambda calculus. if youve made it this far then i hope you managed to
-get something out of this clusterfuck of information. i tried my best to properly format and structure
-these notes whilst i was taking them, so hopefully they were semi-readable.&lt;/p&gt;
+&lt;p&gt;thats it for my notes. if youve made it this far then i hope you managed to get something out of this
+clusterfuck of information. i tried my best to properly format and structure these notes whilst i was
+taking them, so hopefully they were semi-readable.&lt;/p&gt;
 &lt;p&gt;if theres any information that was incorrect within these notes, please do me a favour and inform me
 via one of my contacts listed in my about page. i am always willing to learn more, and if i have
 misunderstood a concept throughout my process of self study, it would be a massive benefit to be
-corrected of the misconception.&lt;/p&gt;
-&lt;p&gt;thanks again for reading. have a great day uwu.&lt;/p&gt;
+corrected of my misconception.&lt;/p&gt;
+&lt;p&gt;thanks again for reading. have a great day.&lt;/p&gt;
 &lt;h2 id=&#34;resources&#34;&gt;resources&lt;/h2&gt;
-&lt;p&gt;resources and references that were used in the making of my notes.&lt;/p&gt;
+&lt;p&gt;additional resources and references.&lt;/p&gt;
 &lt;h3 id=&#34;lambda-calculus&#34;&gt;lambda calculus&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://plato.stanford.edu/entries/lambda-calculus/&#34;&gt;https://plato.stanford.edu/entries/lambda-calculus/&lt;/a&gt;&lt;/li&gt;
@@ -322,7 +323,7 @@ corrected of the misconception.&lt;/p&gt;
 &lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/33509954/explaining-the-church-rosser-theorem-in-basic-terms&#34;&gt;https://stackoverflow.com/questions/33509954/explaining-the-church-rosser-theorem-in-basic-terms&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Church_encoding&#34;&gt;https://en.wikipedia.org/wiki/Church_encoding&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;combinatory-calculi-1&#34;&gt;combinatory calculi&lt;/h3&gt;
+&lt;h3 id=&#34;combinatory-logic&#34;&gt;combinatory logic&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Combinatory_logic&#34;&gt;https://en.wikipedia.org/wiki/Combinatory_logic&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.amazon.com/Lambda-Calculus-Combinators-Introduction-Roger-Hindley/dp/0521898854&#34;&gt;https://www.amazon.com/Lambda-Calculus-Combinators-Introduction-Roger-Hindley/dp/0521898854&lt;/a&gt;&lt;/li&gt;
@@ -345,7 +346,7 @@ corrected of the misconception.&lt;/p&gt;
     <item>
       <title>Haskell</title>
       <link>https://xcr0.github.io/notes/hs/</link>
-      <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
       
       <guid>https://xcr0.github.io/notes/hs/</guid>
       <description>preface something really cool about purely functional languages is the amount they can achieve given such a simple formal system. by the church-turing thesis, a function which operates on natural numbers can be calculated by an effective method if and only if it is computable by a turing machine; therefore rendering a simple system like LC turing complete. amazing.. all operators within haskell are apparently also functions, which is something i find very fascinating due to the fact that it allows us to define our own as well.</description>
@@ -379,21 +380,21 @@ procedural statements are allowed within haskell, is via the &amp;ldquo;do&amp;r
 us to sequentially define statements until the end of the function definition.&lt;/p&gt;
 &lt;h2 id=&#34;polymorphism&#34;&gt;polymorphism&lt;/h2&gt;
 &lt;p&gt;within simply typed lambda calculus, types are monomorphic, with the term mono meaning
-singular. each type must represent T -&amp;gt; T. This is not the case with system F, and by product
+singular. each type must represent &lt;code&gt;T -&amp;gt; T&lt;/code&gt;. This is not the case with system F, and by product
 hindley milner. haskell features 2 forms of polymorphism within the language, parametric and
 ad-hoc/bounded.&lt;/p&gt;
 &lt;p&gt;parametric polymorphism applies to functions which works on many different types. another term
 for this is polymorphic functions. an example of this is the length function within the Prelude
 module. no matter the type of the value stored within the list, it will always properly apply.&lt;/p&gt;
-&lt;p&gt;the function signature for the length function will look something of the sort:
-length :: forall a. [a] -&amp;gt; Integer&lt;/p&gt;
-&lt;p&gt;this means that &amp;ldquo;for all types a, the function length takes a list of elements of type a and
+&lt;p&gt;the function signature for the length function will look something of the sort&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-hs&#34; data-lang=&#34;hs&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; forall a&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; [a] &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Integer&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;this means that &amp;ldquo;for all types a, the function length takes a list of elements of type a and
 returns an integer. haskell does not require us to explicitly use the forall function, as that
 would lead to fairly ugly, unreadable, and unmaintainable code fairly quickly. instead, we can
-define a polymorphic function as such:
-foo :: a -&amp;gt; Int
-foo c = 10&lt;/p&gt;
-&lt;p&gt;the function accepts any type as an argument, but will return only an integer. this ensures that
+define a polymorphic function as such.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-hs&#34; data-lang=&#34;hs&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Int&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;foo&lt;/span&gt; c &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;the function accepts any type as an argument, but will return only an integer. this ensures that
 we are able to place semantic restrictions upon the types passed to our polymorphic function. of
 course, there are much better means of applying this feature within our type system.&lt;/p&gt;
 &lt;p&gt;integer types within haskell are polymorphic too. haskell has 4 type classes for handling integral
@@ -408,29 +409,19 @@ had been properly implemented.&lt;/p&gt;
 with these type classes, we can define our own types, and the actions that operators within the
 language will perform on these types. this is possible since operators within haskell are also functions,
 as previously stated.&lt;/p&gt;
-&lt;p&gt;important thing to note, the let keyword allows us to define variables within expressions. this is
-the usage of the keyword, as it was a bit confusing as to why this existed when you could leave
-it out when defining variables normally.&lt;/p&gt;
-&lt;h2 id=&#34;definition-higher-order-functions&#34;&gt;definition: higher order functions&lt;/h2&gt;
+&lt;h2 id=&#34;higher-order-functions&#34;&gt;higher order functions&lt;/h2&gt;
 &lt;p&gt;higher order functions are functions which work with functions. this means that they can either
 have functions as parameters, or return functions as results. we can encode programming idioms,
 parsers, or algebraic properties within higher order functions.&lt;/p&gt;
-&lt;p&gt;okay so rank n types seem to be a higher rank of parametric polymorphism, in the sense that we
-can apply the forall polymorphic attribute to the signature of our function. this allows our
-polymorphic function to operate with polymorphic functions.&lt;/p&gt;
+&lt;h2 id=&#34;rank-n-types&#34;&gt;rank n types&lt;/h2&gt;
+&lt;p&gt;okay so rank n types seem to be a higher order of parametric polymorphism, in the sense that we
+can apply the forall polymorphic attribute to the signature of our function? this allows our
+polymorphic function to operate with polymorphic functions right?&lt;/p&gt;
 &lt;p&gt;im having some trouble understanding exactly why this is necessary, or why this isnt part of the
 core language; and instead delegated to an extension? is this just a ghc specific feature not
 present within the standard?&lt;/p&gt;
-&lt;p&gt;yea its only a ghc extension lol. there should be some pattern to achieve the same outcomes no?
-else this would be present within standard haskell as well.&lt;/p&gt;
-&lt;p&gt;something that i had not realized before was the fact that untyped lambda calculus quite literally
-is untyped. in all the demonstrations that had been shown to me, plenty of them had been utilizing
-natural numbers within their demonstrations. i now realize that those are church numerals, and you
-can literally encode types within an untyped language. very cool.&lt;/p&gt;
-&lt;p&gt;however i still dont understand why untyped lambda calculus is technically more &amp;ldquo;powerful&amp;rdquo; than
-simply typed lambda calculus. i get the fact that you can manually encode all types in the typed
-LC without the notation within the formal system, but that does not exactly explain why it is deemed
-more powerful. i have not found a resource that explains this as of yet.&lt;/p&gt;
+&lt;p&gt;yea its only a ghc extension lol. there should be some pattern to achieve the same outcomes or some
+alternative no? else this would be present within standard haskell as well.&lt;/p&gt;
 </content>
     </item>
     
@@ -553,7 +544,7 @@ posts (if they are available at the time of viewing this).&lt;/p&gt;
       <guid>https://xcr0.github.io/notes/toc/</guid>
       <description>wip&amp;hellip;
 notes on the theory of computation majority of these notes were taken throughout the course of reading sipser 3rd edition.
-chomsky hierarchy regular languages context free languages context sensitive languages recursively enumerable languages undecidability determinism and nondeterminism finite state automata mealy and moore machines push down automata linear bound automata the turing machine incompletness undecidability the halting problem complexity theory </description>
+chomsky hierarchy regular languages context free languages context sensitive languages recursively enumerable languages finite state automata nondeterminism mealy and moore machines push down automata linear bound automata the turing machine decidability and undecidability the halting problem complexity theory time complexity space complexity intractability approximation algorithms probabilistic algorithms alternation interactive proof systems </description>
       <content>&lt;p&gt;wip&amp;hellip;&lt;/p&gt;
 &lt;h1 id=&#34;notes-on-the-theory-of-computation&#34;&gt;notes on the theory of computation&lt;/h1&gt;
 &lt;p&gt;majority of these notes were taken throughout the course of reading sipser 3rd edition.&lt;/p&gt;
@@ -562,17 +553,23 @@ chomsky hierarchy regular languages context free languages context sensitive lan
 &lt;h2 id=&#34;context-free-languages&#34;&gt;context free languages&lt;/h2&gt;
 &lt;h2 id=&#34;context-sensitive-languages&#34;&gt;context sensitive languages&lt;/h2&gt;
 &lt;h2 id=&#34;recursively-enumerable-languages&#34;&gt;recursively enumerable languages&lt;/h2&gt;
-&lt;h2 id=&#34;undecidability&#34;&gt;undecidability&lt;/h2&gt;
-&lt;h2 id=&#34;determinism-and-nondeterminism&#34;&gt;determinism and nondeterminism&lt;/h2&gt;
 &lt;h2 id=&#34;finite-state-automata&#34;&gt;finite state automata&lt;/h2&gt;
+&lt;h3 id=&#34;nondeterminism&#34;&gt;nondeterminism&lt;/h3&gt;
 &lt;h2 id=&#34;mealy-and-moore-machines&#34;&gt;mealy and moore machines&lt;/h2&gt;
 &lt;h2 id=&#34;push-down-automata&#34;&gt;push down automata&lt;/h2&gt;
 &lt;h2 id=&#34;linear-bound-automata&#34;&gt;linear bound automata&lt;/h2&gt;
 &lt;h2 id=&#34;the-turing-machine&#34;&gt;the turing machine&lt;/h2&gt;
-&lt;h2 id=&#34;incompletness&#34;&gt;incompletness&lt;/h2&gt;
-&lt;h2 id=&#34;undecidability-1&#34;&gt;undecidability&lt;/h2&gt;
-&lt;h3 id=&#34;the-halting-problem&#34;&gt;the halting problem&lt;/h3&gt;
+&lt;h2 id=&#34;decidability-and-undecidability&#34;&gt;decidability and undecidability&lt;/h2&gt;
+&lt;h2 id=&#34;the-halting-problem&#34;&gt;the halting problem&lt;/h2&gt;
 &lt;h2 id=&#34;complexity-theory&#34;&gt;complexity theory&lt;/h2&gt;
+&lt;h2 id=&#34;time-complexity&#34;&gt;time complexity&lt;/h2&gt;
+&lt;h2 id=&#34;space-complexity&#34;&gt;space complexity&lt;/h2&gt;
+&lt;h2 id=&#34;intractability&#34;&gt;intractability&lt;/h2&gt;
+&lt;h2 id=&#34;approximation-algorithms&#34;&gt;approximation algorithms&lt;/h2&gt;
+&lt;h2 id=&#34;probabilistic-algorithms&#34;&gt;probabilistic algorithms&lt;/h2&gt;
+&lt;h2 id=&#34;alternation&#34;&gt;alternation&lt;/h2&gt;
+&lt;h2 id=&#34;interactive-proof-systems&#34;&gt;interactive proof systems&lt;/h2&gt;
+&lt;h2 id=&#34;heading&#34;&gt;&lt;/h2&gt;
 </content>
     </item>
     

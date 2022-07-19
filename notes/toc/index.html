@@ -6,7 +6,7 @@
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="notes on the theory of computation and complexity" />
+<meta name="description" content="notes on the theory of computation, automata, complexity" />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="https://xcr0.github.io/notes/toc/" />
@@ -41,7 +41,7 @@
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Theory of Computation">
-<meta property="og:description" content="notes on the theory of computation and complexity" />
+<meta property="og:description" content="notes on the theory of computation, automata, complexity" />
 <meta property="og:url" content="https://xcr0.github.io/notes/toc/" />
 <meta property="og:site_name" content="xcr0" />
 
@@ -166,20 +166,26 @@
     <li><a href="#context-free-languages">context free languages</a></li>
     <li><a href="#context-sensitive-languages">context sensitive languages</a></li>
     <li><a href="#recursively-enumerable-languages">recursively enumerable languages</a></li>
-    <li><a href="#undecidability">undecidability</a></li>
-    <li><a href="#determinism-and-nondeterminism">determinism and nondeterminism</a></li>
-    <li><a href="#finite-state-automata">finite state automata</a></li>
+    <li><a href="#finite-state-automata">finite state automata</a>
+      <ul>
+        <li><a href="#nondeterminism">nondeterminism</a></li>
+      </ul>
+    </li>
     <li><a href="#mealy-and-moore-machines">mealy and moore machines</a></li>
     <li><a href="#push-down-automata">push down automata</a></li>
     <li><a href="#linear-bound-automata">linear bound automata</a></li>
     <li><a href="#the-turing-machine">the turing machine</a></li>
-    <li><a href="#incompletness">incompletness</a></li>
-    <li><a href="#undecidability-1">undecidability</a>
-      <ul>
-        <li><a href="#the-halting-problem">the halting problem</a></li>
-      </ul>
-    </li>
+    <li><a href="#decidability-and-undecidability">decidability and undecidability</a></li>
+    <li><a href="#the-halting-problem">the halting problem</a></li>
     <li><a href="#complexity-theory">complexity theory</a></li>
+    <li><a href="#time-complexity">time complexity</a></li>
+    <li><a href="#space-complexity">space complexity</a></li>
+    <li><a href="#intractability">intractability</a></li>
+    <li><a href="#approximation-algorithms">approximation algorithms</a></li>
+    <li><a href="#probabilistic-algorithms">probabilistic algorithms</a></li>
+    <li><a href="#alternation">alternation</a></li>
+    <li><a href="#interactive-proof-systems">interactive proof systems</a></li>
+    <li><a href="#heading"></a></li>
   </ul>
 </nav>
     </div>
@@ -194,17 +200,23 @@
 <h2 id="context-free-languages">context free languages<a href="#context-free-languages" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <h2 id="context-sensitive-languages">context sensitive languages<a href="#context-sensitive-languages" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <h2 id="recursively-enumerable-languages">recursively enumerable languages<a href="#recursively-enumerable-languages" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<h2 id="undecidability">undecidability<a href="#undecidability" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<h2 id="determinism-and-nondeterminism">determinism and nondeterminism<a href="#determinism-and-nondeterminism" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <h2 id="finite-state-automata">finite state automata<a href="#finite-state-automata" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h3 id="nondeterminism">nondeterminism<a href="#nondeterminism" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
 <h2 id="mealy-and-moore-machines">mealy and moore machines<a href="#mealy-and-moore-machines" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <h2 id="push-down-automata">push down automata<a href="#push-down-automata" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <h2 id="linear-bound-automata">linear bound automata<a href="#linear-bound-automata" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <h2 id="the-turing-machine">the turing machine<a href="#the-turing-machine" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<h2 id="incompletness">incompletness<a href="#incompletness" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<h2 id="undecidability-1">undecidability<a href="#undecidability-1" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<h3 id="the-halting-problem">the halting problem<a href="#the-halting-problem" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<h2 id="decidability-and-undecidability">decidability and undecidability<a href="#decidability-and-undecidability" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="the-halting-problem">the halting problem<a href="#the-halting-problem" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <h2 id="complexity-theory">complexity theory<a href="#complexity-theory" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="time-complexity">time complexity<a href="#time-complexity" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="space-complexity">space complexity<a href="#space-complexity" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="intractability">intractability<a href="#intractability" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="approximation-algorithms">approximation algorithms<a href="#approximation-algorithms" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="probabilistic-algorithms">probabilistic algorithms<a href="#probabilistic-algorithms" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="alternation">alternation<a href="#alternation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="interactive-proof-systems">interactive proof systems<a href="#interactive-proof-systems" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="heading"><a href="#heading" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 
       </div></div>
 

@@ -5,13 +5,14 @@
     <link>https://xcr0.github.io/tags/</link>
     <description>Recent content in Tags on xcr0</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://xcr0.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Sun, 11 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xcr0.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>testing</title>
-      <link>https://xcr0.github.io/tags/testing/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>pwn</title>
+      <link>https://xcr0.github.io/tags/pwn/</link>
+      <pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://xcr0.github.io/tags/testing/</guid>
+      <guid>https://xcr0.github.io/tags/pwn/</guid>
       <description></description>
       <content></content>
     </item>

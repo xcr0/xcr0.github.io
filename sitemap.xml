@@ -12,7 +12,31 @@
     <lastmod>2022-07-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://xcr0.github.io/notes/hs/</loc>
-    <lastmod>2022-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2021-12-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xcr0.github.io/posts/tcache/</loc>
+    <lastmod>2021-04-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xcr0.github.io/posts/</loc>
+    <lastmod>2021-04-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xcr0.github.io/tags/pwn/</loc>
+    <lastmod>2021-04-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xcr0.github.io/tags/</loc>
+    <lastmod>2021-04-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xcr0.github.io/posts/uaf/</loc>
+    <lastmod>2021-04-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xcr0.github.io/posts/hacknote/</loc>
+    <lastmod>2021-03-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xcr0.github.io/posts/force/</loc>
+    <lastmod>2021-03-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xcr0.github.io/posts/fastbin/</loc>
+    <lastmod>2021-03-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://xcr0.github.io/about/</loc>
   </url><url>
@@ -30,8 +54,6 @@
   </url><url>
     <loc>https://xcr0.github.io/pgp/</loc>
   </url><url>
-    <loc>https://xcr0.github.io/posts/</loc>
-  </url><url>
     <loc>https://xcr0.github.io/notes/pwn/</loc>
   </url><url>
     <loc>https://xcr0.github.io/notes/rev/</loc>
@@ -40,12 +62,6 @@
   </url><url>
     <loc>https://xcr0.github.io/showcase/</loc>
   </url><url>
-    <loc>https://xcr0.github.io/tags/</loc>
-  </url><url>
-    <loc>https://xcr0.github.io/tags/testing/</loc>
-  </url><url>
     <loc>https://xcr0.github.io/notes/toc/</loc>
-  </url><url>
-    <loc>https://xcr0.github.io/posts/welcome/</loc>
   </url>
 </urlset>

