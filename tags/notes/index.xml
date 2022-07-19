@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>notes on xcr0</title>
+    <link>https://xcr0.github.io/tags/notes/</link>
+    <description>Recent content in notes on xcr0</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://xcr0.github.io/tags/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lambda Calculus, Combinatory Logic, and Type Theory</title>
+      <link>https://xcr0.github.io/notes/lambda/</link>
+      <pubDate>Tue, 19 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://xcr0.github.io/notes/lambda/</guid>
+      <description>the lambda calculus something that i have noticed about the lambda calculus is the fact that it is very simple given a programming background; but is full of strange and mysterious names for simple concepts that we programmers see in everyday life.
+i create these notes as a reference to some of the notations and concepts present within the lambda calculus, as well as some supplementary material such as theorems and definitions.</description>
+      <content>&lt;h2 id=&#34;the-lambda-calculus&#34;&gt;the lambda calculus&lt;/h2&gt;
+&lt;p&gt;something that i have noticed about the lambda calculus is the fact that it is very simple given a
+programming background; but is full of strange and mysterious names for simple concepts that we
+programmers see in everyday life.&lt;/p&gt;
+&lt;p&gt;i create these notes as a reference to some of the notations and concepts present within the lambda
+calculus, as well as some supplementary material such as theorems and definitions.&lt;/p&gt;
+&lt;p&gt;lambda calculus is a formal system of logic which aims to describe computation. we can prove that the
+system is indeed turing complete via the church-turing thesis, which states that; any problem which
+is computable by the lambda calculus.&lt;/p&gt;
+&lt;p&gt;the relation between the lambda calculus and turing machine can be formally defined via the church
+turing thesis, which states what any problem which can be effectively calculable in finite time by
+a turing machine, can be described via the lambda calculus. (i am sort of paraphrasing, so apologies
+if it is not as correct as the original definition of the thesis).&lt;/p&gt;
+&lt;p&gt;we know this term simply as turing completeness, and its a trait that is demonstrated within the majority,
+if not all programming languages shown today. so by definition, the lambda calculus is technically a
+bare minimum for a programming language. (with the exception of smaller formal systems such as iota/jot/zot).&lt;/p&gt;
+&lt;h2 id=&#34;basic-syntax&#34;&gt;basic syntax&lt;/h2&gt;
+&lt;p&gt;the basic syntax of the lambda calculus is as follows&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-hs&#34; data-lang=&#34;hs&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;term&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;variable&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; λ &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;variable&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;.&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;variable&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; ( &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;term&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;term&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;the syntax for the system of logic is so incredibly simple, but as we will see later; it holds the
+computational power equivalent to that of the turing machine (via the church-turing thesis).&lt;/p&gt;
+&lt;h3 id=&#34;disclaimer&#34;&gt;disclaimer&lt;/h3&gt;
+&lt;p&gt;before we proceed, something that i should inform you of is the notation that i will be using throughout
+the rest of the post. i am not going to be strictly sticking with the syntax, and there will be slight
+deviations as i will mention now.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;when defining a lambda abstraction, i will not be using the lambda character. instead, i will be
+using haskell&amp;rsquo;s style of defining lambda functions, and simply represent the &lt;code&gt;λ &lt;/code&gt; character
+by a backslash &lt;code&gt;\&lt;/code&gt;, followed by the variable.&lt;/li&gt;
+&lt;li&gt;i will omit useless braces at various points within my notes if they are not necessary.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;currying&#34;&gt;currying&lt;/h2&gt;
+&lt;p&gt;as we saw from the previous bnf definition of the syntax of lambda calculus, every application must
+only contain a single variable. this means that we cannot pass more than one parameter to a function/
+abstraction within the lambda calculus.&lt;/p&gt;
+&lt;p&gt;for example, here is an invalid function abstraction which performs addition.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-hs&#34; data-lang=&#34;hs&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;xy&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;(x &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; y)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;lets curry this function and correct it.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-hs&#34; data-lang=&#34;hs&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;x&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;y&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;(x &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; y))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;very nice, now we have a valid abstraction.&lt;/p&gt;
+&lt;h2 id=&#34;free-and-bound-variables--closure--combinators&#34;&gt;free and bound variables | closure &amp;amp; combinators&lt;/h2&gt;
+&lt;p&gt;a bound variable is a variable which is declared within the current function scope.&lt;/p&gt;
+&lt;p&gt;on the other hand, a free variable is a variable which utilizes a variable from a parent scope. within
+programming, this can be thought of as using a global variable, or a lambda capturing a variable from a
+parent scope. in this case, the function can be thought of as a closure.&lt;/p&gt;
+&lt;p&gt;this may seem rather arbitrary, but some rather interesting complications arise as we begin to work with
+higher order functions. if we can have closures which inherit scope from a parent, what happens when we
+return this function? the closure is no longer present underneath the parent scope, so does the scope
+go with the closure, or does it simply cause an error?&lt;/p&gt;
+&lt;p&gt;within a lexically scoped language, the closure will keep its scope, and it&amp;rsquo;s free variables. this may
+differ in some languages, but it remains true in the lambda calculus.&lt;/p&gt;
+&lt;p&gt;a combinator on the other hand is the complete opposite, in the sense that it does not use any free
+variable. this is the only requirement of a combinator. the concept of a combinator can be further
+elaborated on within the study of combinatory logic (not to be confused with combinatorics).&lt;/p&gt;
+&lt;p&gt;there is going to be a section for combinatory theory at a later point within the blog. the only thing
+we need to understand at this point is the concept of the combinator/closure, and how they relate to
+free/bound variables and higher order functions.&lt;/p&gt;
+&lt;h2 id=&#34;beta-reduction&#34;&gt;beta reduction&lt;/h2&gt;
+&lt;p&gt;the concept of beta reduction is simple. we simply apply a variable to an abstraction, which
+we can do simply by substituting. this is simply a fancy name for a very very well understood
+concept within the rudimentary algebras.&lt;/p&gt;
+&lt;p&gt;here is a small demonstration of the beta reduction.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-hs&#34; data-lang=&#34;hs&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;x&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;x) &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;we can reduce this simply by substituting the redex by 3, which results in 3.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;3
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;now that was a fairly simple example of beta reduction, lets amp this up a bit and write a
+lambda abstraction which simply performs addition on the natural numbers.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-hs&#34; data-lang=&#34;hs&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;x&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;y&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;(x &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; y)) &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;) &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;now lets apply a beta reduction to this step by step and view the result.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-hs&#34; data-lang=&#34;hs&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;x&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;y&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;(x &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; y)) &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;) &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;y&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; y)) &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;now as we can see, beta reduction simply means substituting the variables within the abstractions.&lt;/p&gt;
+&lt;h2 id=&#34;the-church-rosser-theorem&#34;&gt;the church-rosser theorem&lt;/h2&gt;
+&lt;p&gt;when applying variables to lambda abstractions, we also need to know the order in which we are
+reducing/evaluating the abstraction.&lt;/p&gt;
+&lt;p&gt;the church rosser theorem states that, &amp;ldquo;when applying reduction rules to terms, the ordering in
+which the reductions are chosen does not make a difference to the eventual result&amp;rdquo;. this theorem
+essentially states that the lambda calculus is confluent.&lt;/p&gt;
+&lt;p&gt;so if the result of the abstraction is always the same, then why is the evaluation order/strategy
+significant?&lt;/p&gt;
+&lt;p&gt;the church rosser theorem states that all abstractions will always evaluate to the same result
+regardless of the strategy, but something to note is the fact that not all evaluation strategies
+will result in a final outcome.&lt;/p&gt;
+&lt;p&gt;so the theorem states that there is no logical fallacy within the lambda calculus, as it is
+confluent and will produce the same result after evaluation, but not all evaluation strategies
+will produce a correct result.&lt;/p&gt;
+&lt;p&gt;this is where the importance of reduction strategies lie, as we must use the correct order if
+we want to produce a correct final result.&lt;/p&gt;
+&lt;p&gt;here is a diagram of the proof for the theorem. this is much easier to visualize as opposed to
+the textual proof.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.researchgate.net/profile/Christopher-Scherb/publication/327989883/figure/fig4/AS:676968160821249@1538413195115/Graphical-example-of-the-Church-Rosser-Theorem13.ppm&#34; alt=&#34;church-rosser&#34;&gt;&lt;/p&gt;
+&lt;p&gt;this proof of the church rosser theorem directly translates to, &amp;ldquo;if there are two distinct reductions
+or sequences of reductions that can be applied to the same term, then there exists a term that is
+reachable from both results, by applying (possibly empty) sequences of additional reductions&amp;rdquo;.&lt;/p&gt;
+&lt;h2 id=&#34;beta-normal-form&#34;&gt;beta normal form&lt;/h2&gt;
+&lt;h2 id=&#34;beta-equivalence&#34;&gt;beta equivalence&lt;/h2&gt;
+&lt;h2 id=&#34;alpha-conversion&#34;&gt;alpha conversion&lt;/h2&gt;
+&lt;h2 id=&#34;alpha-equivalence&#34;&gt;alpha equivalence&lt;/h2&gt;
+&lt;h2 id=&#34;eta-conversion&#34;&gt;eta conversion&lt;/h2&gt;
+&lt;h2 id=&#34;eta-reduction&#34;&gt;eta reduction&lt;/h2&gt;
+&lt;h2 id=&#34;encoding-types&#34;&gt;encoding types&lt;/h2&gt;
+&lt;p&gt;untyped lambda calculus by itself is, as the name suggests, inherently untyped. this means that there
+are no natural numbers, booleans, strings; no types of any kind. however, we can encode types within
+the untyped formal system, which we can then use to perform calculations and logic.&lt;/p&gt;
+&lt;p&gt;within the previous demonstrations, i made extra effort in ensuring that i have explicitly specified
+that the lambda absractions that we were working with were made under the assumption of natural
+numbers.&lt;/p&gt;
+&lt;h3 id=&#34;church-encoding&#34;&gt;church encoding&lt;/h3&gt;
+&lt;h4 id=&#34;church-numerals&#34;&gt;church numerals&lt;/h4&gt;
+&lt;h4 id=&#34;church-booleans&#34;&gt;church booleans&lt;/h4&gt;
+&lt;h4 id=&#34;church-predicates&#34;&gt;church predicates&lt;/h4&gt;
+&lt;h4 id=&#34;church-pairs&#34;&gt;church pairs&lt;/h4&gt;
+&lt;h4 id=&#34;church-lists&#34;&gt;church lists&lt;/h4&gt;
+&lt;h3 id=&#34;church-encoding-demonstration&#34;&gt;church encoding demonstration&lt;/h3&gt;
+&lt;p&gt;i find the concept of encoding types within an untyped language particularly interesting, so i have
+decided to further demonstrate this concept by encoding each monomorphic church type within haskell;
+along with their associated operations.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-hs&#34; data-lang=&#34;hs&#34;&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;scott-encoding&#34;&gt;scott encoding&lt;/h3&gt;
+&lt;p&gt;scott encoding works under the same concept as the church encoding (which was previously demonstrated).&lt;/p&gt;
+&lt;h3 id=&#34;peano-numbers&#34;&gt;peano numbers&lt;/h3&gt;
+&lt;h2 id=&#34;the-fixed-point-theorem&#34;&gt;the fixed point theorem&lt;/h2&gt;
+&lt;p&gt;a fixed point of a function is a value that is mapped to itself by the function. in lambda calculus,
+the same concept applies in the sense that we can apply the same abstraction by itself, which
+ultimitely results in something known as the fixed point combinator. the fixed point combinator, also
+known as the Y combinator; is a means of defining recursion within the lambda calculus.&lt;/p&gt;
+&lt;p&gt;the Y combinator can be effectively defined as follows.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-hs&#34; data-lang=&#34;hs&#34;&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;bohms-theorem&#34;&gt;bohm&amp;rsquo;s theorem&lt;/h2&gt;
+&lt;h2 id=&#34;quasi-leftmost-reduction-theorem&#34;&gt;quasi leftmost reduction theorem&lt;/h2&gt;
+&lt;h2 id=&#34;recursion-and-computation&#34;&gt;recursion and computation&lt;/h2&gt;
+&lt;h2 id=&#34;undecidability&#34;&gt;undecidability&lt;/h2&gt;
+&lt;h2 id=&#34;combinatory-calculi&#34;&gt;combinatory calculi&lt;/h2&gt;
+&lt;p&gt;combinatory calculi is a branch of mathematical logic which is rooted in the lambda calculus, but extends
+the system by eliminating the need for free variables. instead, it relies completely on the composition
+of a finite set of primitive combinatory terms. as we have previously defined, a combinatory term is simply
+a function that contains no free variables.&lt;/p&gt;
+&lt;h2 id=&#34;de-brujin-indices&#34;&gt;de brujin indices&lt;/h2&gt;
+&lt;h2 id=&#34;ski-combinatory-calculus&#34;&gt;ski combinatory calculus&lt;/h2&gt;
+&lt;h2 id=&#34;ibcs-combinatory-calculus&#34;&gt;ibcs combinatory calculus&lt;/h2&gt;
+&lt;h2 id=&#34;y-combinator&#34;&gt;y combinator&lt;/h2&gt;
+&lt;h2 id=&#34;simple-typing&#34;&gt;simple typing&lt;/h2&gt;
+&lt;h2 id=&#34;subtyping&#34;&gt;subtyping&lt;/h2&gt;
+&lt;h2 id=&#34;recursive-typing&#34;&gt;recursive typing&lt;/h2&gt;
+&lt;h2 id=&#34;system-f-and-polymorphism&#34;&gt;system F and polymorphism&lt;/h2&gt;
+&lt;h3 id=&#34;godels-incompleteness-theorem&#34;&gt;godels incompleteness theorem&lt;/h3&gt;
+&lt;h2 id=&#34;the-hindley-milner-type-system&#34;&gt;the hindley milner type system&lt;/h2&gt;
+&lt;h2 id=&#34;hindley-milner-type-inference&#34;&gt;hindley milner type inference&lt;/h2&gt;
+&lt;p&gt;now we are treading into the territory of compiler frontend development with the type inference algorithm
+of a hindley milner type system. this is an algorithm that it utilizes within a large sum of languages,
+most notable haskell. this is only required within a statically typed language, which is a language which
+requires that all types are infered and declared at compile time, so they do not cause problems at runtime.&lt;/p&gt;
+&lt;p&gt;there are always tradeoffs with every decision within all fields of sciences, so i will attempt to clarify
+the definitions of programming type systems, as well as the benefits that are inherit within each.&lt;/p&gt;
+&lt;h2 id=&#34;higher-order-type-systems&#34;&gt;higher order type systems&lt;/h2&gt;
+&lt;h2 id=&#34;the-lambda-cube&#34;&gt;the lambda cube&lt;/h2&gt;
+&lt;h2 id=&#34;static-typing&#34;&gt;static typing&lt;/h2&gt;
+&lt;p&gt;the concept of static typing, as previously stated, is the act of the compiler inferring and handling the
+type checking at compile time; in the case of programming languages, the frontend compiler.&lt;/p&gt;
+&lt;p&gt;language such haskell, C, C++, java, rust and more use this; and is commonly seen within languages which
+compile to machine code, as opposed to some intermediate representation which acts as bytecode for some
+abstract runtime environment.&lt;/p&gt;
+&lt;p&gt;the following is a list of the benefits that i can currently think of for statically typed languages.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;faster runtime spees as the environment does not have to worry about type checking.
+&lt;ul&gt;
+&lt;li&gt;this remains true for both interpreted and compiled languages.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;a must for compiling to machine code, as hardware does not support type checking.&lt;/li&gt;
+&lt;li&gt;it makes bugs easy to catch early on, as the compiler can warn the user and terminate compilation.&lt;/li&gt;
+&lt;li&gt;there are probably much more, but my brain is fuzzy right now. sorry uwu.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;dynamic-typing&#34;&gt;dynamic typing&lt;/h2&gt;
+&lt;p&gt;a dynamically typed language is a language which performs type checking at runtime. this approach to
+type checking is only present within interpreted languages, since as previously stated; hardware has no
+support for type checking within its runtime. it only understand data and code, information and opcodes.&lt;/p&gt;
+&lt;p&gt;now before we get into the pros of dynamic typing, i want to first explain an extremely important concept
+within dynamic typing that almost all runtime environment use; and that is call ducktyping.&lt;/p&gt;
+&lt;p&gt;the concept of ducktyping is very simple. there is a funny little joke that is used that encapsulates this
+concept fairly well, and serves as the origin of the name: &amp;ldquo;if it walks like a duck, and quacks like a
+duck, then it must be a duck&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;this may seem a bit strange and arbitrarily random at first glance, but i will attempt to explain the
+meaning behind this statement. lets first start off with an example.&lt;/p&gt;
+&lt;p&gt;within python, everything is stored as an object at runtime. these include literally everything, from
+integers, lists, strings, functions, classes, modules; everything that is a tangible entity at runtime
+will be stored as an object. these objects themselves hold their own type information. this allows the
+object&amp;rsquo;s type to be changed at runtime dynamically simply by assigning it a different type and values.&lt;/p&gt;
+&lt;p&gt;when the python runtime want to evaluate something as simple as an expression, it will first need to
+ensure that the types within the expression are capable of arithmetic. it does do this by categorizing
+every single type into what it can and cant do, that would be way too inefficient for everybodies
+standards.&lt;/p&gt;
+&lt;p&gt;instead, it will simply check to see if the object is capable of the arithmetic operation. it doesnt
+care about its type at all, it simply check if the object is capable of the operation it wants to do. if
+the object looks like an integer that can perform arithmetic, then the interpreter will attempt to perform
+arithemtic on the object.&lt;/p&gt;
+&lt;p&gt;this drastically speeds up the the type checking, and by product the runtime speeds. i will explain the
+entire process of the type checking system at a later section within the post, if you are interested then
+you can skip there directly. there are no additional prerequisite materials for that section of the post
+besides a fairly general understanding of the c programming language.&lt;/p&gt;
+&lt;p&gt;the benefits of dynamically typed languages are as shown.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;lack of type checking pass makes compilation speeds faster.
+&lt;ul&gt;
+&lt;li&gt;this is generally a massive benefit for scripting languages such as python and lua.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;dynamic types allow for much faster object oriented runtime polymorphism.&lt;/li&gt;
+&lt;li&gt;generic programming does not have to be restricted at compile time.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;strongly-typed&#34;&gt;strongly typed&lt;/h2&gt;
+&lt;p&gt;now we move onto the concept of strongly and weakly typed systems. something that is very important
+to note is the fact that these two have NO RELATION TO STATIC/DYNAMIC TYPING!!!! this is something
+that had confused me when i had originally come across these concepts.&lt;/p&gt;
+&lt;p&gt;the concept of strongly typed languages simply means that the language itself enforces a restriction
+on converting/performing operations between types. in this case, it simply means that an integer cannot
+perform an operation with a float if they are defined as two different types. languages such as haskell
+and C++ are strongly typed.&lt;/p&gt;
+&lt;p&gt;this may seem like a very odd and restrictive decision to emplace on a type system for a programming
+language, but it does come with it&amp;rsquo;s benefits and solutions.&lt;/p&gt;
+&lt;p&gt;for example, strongly typed languages will generally include something within their langauge known as
+ad-hoc or bounded polymorphism. this is when the user may explicitly state what function can operate
+on which types. i understand that this definition of ad-hoc polymorphism may be a bit vague, but i will
+do my best to explain this to the best of my capacity.&lt;/p&gt;
+&lt;p&gt;as you may know, C++ is not exactly the best example to show strong typing, as its foundations are built
+entirely off of the C programming language, which contains a concept known as implicit conversion. this
+allows for explicit type casting, and automatic conversions within expressions for a much more streamlined
+programming experience. for this reason, i will be using haskell to explain this concept.&lt;/p&gt;
+&lt;p&gt;haskell is a purely functional, statically and strongly typed language which is largely rooted in
+mathematics. this makes it a very beautiful language, but also a pain to code in. some people may
+disagree with this statement, but i believe that it is an irrefutable fact that there are better
+languages that are specifically tailored to the programming experience; as opposed to the purity of
+the language itself. an example of this is ocaml, but that another rant that i dont want to get into
+here.&lt;/p&gt;
+&lt;p&gt;within haskell, there is a concept known as a typeclass. this is a feature that allows you to define
+a finite set of methods that can operate across multiple types. if you don&amp;rsquo;t have a background in
+any functional language, i would highly recommend learning one. it will greatly aid in your
+understanding of the concepts present within the lambda calculus, which functional programming is
+largely based on. (i say largely, as some functional languages are not pure).&lt;/p&gt;
+&lt;p&gt;for those who have experience in C++, ad-hoc/bounded polymorphism is the same thing as operator
+overloading. operator overloading allows the user to overload functionality of methods/functions
+on specific types. this is an important staple within generic programming in C++.&lt;/p&gt;
+&lt;p&gt;the following is a list of the benefits of a strongly typed system.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;type correctness within the program
+&lt;ul&gt;
+&lt;li&gt;if the programmer is forced to explicitly defined the set of operations which are allowed on a
+set of types, then the programmer will know that the expressions are indeed using the correct
+types; as opposed to allowing the compiler to perform implicit type casts.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;static analysis is much more useful within a strongly typed languages as the analyzer knows each
+type of each operand within an expression.&lt;/li&gt;
+&lt;li&gt;eliminates an entire class of bugs/vulnerabilities that are present within weakly typed language,
+such as type confusion and insecurity.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;weakly-typed&#34;&gt;weakly typed&lt;/h2&gt;
+&lt;p&gt;a weakly typed language is the opposite of a strongly typed language (wow really?), in the sense
+that the language does not enforce operations between exact types; and may allow for explicit
+conversion between types.&lt;/p&gt;
+&lt;p&gt;an example of a weakly typed language is the C programming language (semi-weakly typed). i chose
+C for this example, as an extremely well known concept within the language is type casting and
+implicit conversion (as we covered previously). this allows the programmer to explicitly cast
+the types present within an expression to satisfy the compiler.&lt;/p&gt;
+&lt;p&gt;this approach places much more freedom within the hands of the programmer and reduces the amount
+of code they have to write for semi-generic code, but also introduces a class of vulnerability
+into the language. if used incorrectly, the type safety of the program may potentially be
+compromised, and may cause undefined behaviour in the best case, and an exploitable bug in the
+worst.&lt;/p&gt;
+&lt;p&gt;however, weakly typed languages are not without benefits, as with all tradeoffs. the following is
+a list of the benefits of weak typing.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;places much more control in the hands of the developer and allows them to explicitly convert types.
+&lt;ul&gt;
+&lt;li&gt;this largely depends on the language specification and compiler.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;reduces code bloat and boiler-plate.
+&lt;ul&gt;
+&lt;li&gt;the user does not have to explicitly define the operations to be performed on each type to achieve
+ad-hoc/bounded polymorphism&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;pythons-type-checking-system&#34;&gt;python&amp;rsquo;s type checking system&lt;/h2&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;conclusion&lt;/h2&gt;
+&lt;p&gt;thats it for my notes. if youve made it this far then i hope you managed to get something out of this
+clusterfuck of information. i tried my best to properly format and structure these notes whilst i was
+taking them, so hopefully they were semi-readable.&lt;/p&gt;
+&lt;p&gt;if theres any information that was incorrect within these notes, please do me a favour and inform me
+via one of my contacts listed in my about page. i am always willing to learn more, and if i have
+misunderstood a concept throughout my process of self study, it would be a massive benefit to be
+corrected of my misconception.&lt;/p&gt;
+&lt;p&gt;thanks again for reading. have a great day.&lt;/p&gt;
+&lt;h2 id=&#34;resources&#34;&gt;resources&lt;/h2&gt;
+&lt;p&gt;additional resources and references.&lt;/p&gt;
+&lt;h3 id=&#34;lambda-calculus&#34;&gt;lambda calculus&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://plato.stanford.edu/entries/lambda-calculus/&#34;&gt;https://plato.stanford.edu/entries/lambda-calculus/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Lambda_calculus&#34;&gt;https://en.wikipedia.org/wiki/Lambda_calculus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://math.stackexchange.com/questions/65622/whats-the-point-of-eta-conversion-in-lambda-calculus&#34;&gt;https://math.stackexchange.com/questions/65622/whats-the-point-of-eta-conversion-in-lambda-calculus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/55996764/lambda-eta-conversion-expansion-reduction-clarification&#34;&gt;https://stackoverflow.com/questions/55996764/lambda-eta-conversion-expansion-reduction-clarification&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Church%E2%80%93Rosser_theorem&#34;&gt;https://en.wikipedia.org/wiki/Church%E2%80%93Rosser_theorem&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/33509954/explaining-the-church-rosser-theorem-in-basic-terms&#34;&gt;https://stackoverflow.com/questions/33509954/explaining-the-church-rosser-theorem-in-basic-terms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Church_encoding&#34;&gt;https://en.wikipedia.org/wiki/Church_encoding&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;combinatory-logic&#34;&gt;combinatory logic&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Combinatory_logic&#34;&gt;https://en.wikipedia.org/wiki/Combinatory_logic&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/Lambda-Calculus-Combinators-Introduction-Roger-Hindley/dp/0521898854&#34;&gt;https://www.amazon.com/Lambda-Calculus-Combinators-Introduction-Roger-Hindley/dp/0521898854&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://encyclopediaofmath.org/wiki/Combinatory_logic&#34;&gt;https://encyclopediaofmath.org/wiki/Combinatory_logic&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/SKI_combinator_calculus&#34;&gt;https://en.wikipedia.org/wiki/SKI_combinator_calculus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/B,_C,_K,_W_system&#34;&gt;https://en.wikipedia.org/wiki/B,_C,_K,_W_system&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://people.cs.uchicago.edu/~odonnell/Teacher/Lectures/Formal_Organization_of_Knowledge/Examples/combinator_calculus/&#34;&gt;https://people.cs.uchicago.edu/~odonnell/Teacher/Lectures/Formal_Organization_of_Knowledge/Examples/combinator_calculus/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/Combinatory%20Logic%20in%20Programming.pdf&#34;&gt;https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/Combinatory%20Logic%20in%20Programming.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;type-theory-not-homotopy-type-theory-hott-&#34;&gt;type theory (not homotopy type theory (HoTT) )&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Lambda_cube&#34;&gt;https://en.wikipedia.org/wiki/Lambda_cube&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://users.cs.northwestern.edu/~jesse/course/type-systems-wi18/type-notes/index.html&#34;&gt;https://users.cs.northwestern.edu/~jesse/course/type-systems-wi18/type-notes/index.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.mathemafrica.org/?p=13035&#34;&gt;http://www.mathemafrica.org/?p=13035&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/Types-Programming-Languages-MIT-Press/dp/0262162091&#34;&gt;https://www.amazon.com/Types-Programming-Languages-MIT-Press/dp/0262162091&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>
