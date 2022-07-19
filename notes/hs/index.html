@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Haskell :: xcr0</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="notes on the haskell programming language" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://xcr0.github.io/notes/hs/" />
+
+<meta name="google-site-verification" content="tn8JztGkSZ7fqKquNJN730NfUJJR2wyABLpVx5GCh6Y" />
+
+
+<link rel="stylesheet" href="https://xcr0.github.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://xcr0.github.io/assets/green.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon" href="https://xcr0.github.io/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="https://xcr0.github.io/img/favicon/green.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="https://twitter.com/extcr0/" />
+  
+    <meta name="twitter:creator" content="xcr0" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Haskell">
+<meta property="og:description" content="notes on the haskell programming language" />
+<meta property="og:url" content="https://xcr0.github.io/notes/hs/" />
+<meta property="og:site_name" content="xcr0" />
+
+  
+    <meta property="og:image" content="https://xcr0.github.io/img/favicon/green.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2022-07-18 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="green">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    xcr0
+  </div>
+</a>
+
+    </div>
+    
+      <div class="menu-trigger">menu</div>
+    
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/notes">Notes</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+        
+          <li><a href="/tags">Tags</a></li>
+        
+      
+      
+    
+
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/notes">Notes</a></li>
+      
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+      
+        <li><a href="/tags">Tags</a></li>
+      
+    
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://xcr0.github.io/notes/hs/">Haskell</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2022-07-18
+        
+      </span>
+    
+    
+      <span class="post-author">:: xcr0</span>
+    
+    
+  </div>
+
+  
+  
+
+
+  
+    <div class="table-of-contents">
+      <h2>
+        Table of Contents
+      </h2>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#laziness">laziness</a></li>
+    <li><a href="#naming-conventions">naming conventions</a></li>
+    <li><a href="#type-system">type system</a></li>
+    <li><a href="#polymorphism">polymorphism</a></li>
+    <li><a href="#definition-higher-order-functions">definition: higher order functions</a></li>
+  </ul>
+</nav>
+    </div>
+  
+
+  <div class="post-content"><div>
+        <h1 id="preface">preface<a href="#preface" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>something really cool about purely functional languages is the amount they can achieve
+given such a simple formal system. by the church-turing thesis, a function which operates
+on natural numbers can be calculated by an effective method if and only if it is computable
+by a turing machine; therefore rendering a simple system like LC turing complete. amazing..
+all operators within haskell are apparently also functions, which is something i find very
+fascinating due to the fact that it allows us to define our own as well. fp is cool!</p>
+<h2 id="laziness">laziness<a href="#laziness" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>a feature of haskell is laziness, which is often praised as a great feature of the language
+due to the fact that it provides a plethora of benefits that i will explain. the term lazy
+implies to the fact that nothing is evaluated unless it has been explicitly applied. you
+could define a function which theoretically falls into infinite recursion; but wont due
+the fact that only the required values will be computed.</p>
+<p>this laziness allows for elegant solutions to problems which would otherwise require
+much lengthier code to solve.</p>
+<h2 id="naming-conventions">naming conventions<a href="#naming-conventions" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>all types within haskell must be capitalized. this is not a convention, it is enforced by
+the language. this allows the developer to encode semantics within the source, which
+therefore leads to more readable code (and technically faster compilation).</p>
+<h2 id="type-system">type system<a href="#type-system" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>haskell operates on the hindley milner type system, which is essentially a restricted
+system F which requires annotations. this means that haskell has things like polymorphism
+and type inference within its system.</p>
+<p>within purely functional languages, almost everything is an expression, and all values are
+immutable by default. this includes things like conditionals, which are not technically
+statements but ternary expressions (conditional expressions). the only exception to which
+procedural statements are allowed within haskell, is via the &ldquo;do&rdquo; keyword. this allows
+us to sequentially define statements until the end of the function definition.</p>
+<h2 id="polymorphism">polymorphism<a href="#polymorphism" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>within simply typed lambda calculus, types are monomorphic, with the term mono meaning
+singular. each type must represent T -&gt; T. This is not the case with system F, and by product
+hindley milner. haskell features 2 forms of polymorphism within the language, parametric and
+ad-hoc/bounded.</p>
+<p>parametric polymorphism applies to functions which works on many different types. another term
+for this is polymorphic functions. an example of this is the length function within the Prelude
+module. no matter the type of the value stored within the list, it will always properly apply.</p>
+<p>the function signature for the length function will look something of the sort:
+length :: forall a. [a] -&gt; Integer</p>
+<p>this means that &ldquo;for all types a, the function length takes a list of elements of type a and
+returns an integer. haskell does not require us to explicitly use the forall function, as that
+would lead to fairly ugly, unreadable, and unmaintainable code fairly quickly. instead, we can
+define a polymorphic function as such:
+foo :: a -&gt; Int
+foo c = 10</p>
+<p>the function accepts any type as an argument, but will return only an integer. this ensures that
+we are able to place semantic restrictions upon the types passed to our polymorphic function. of
+course, there are much better means of applying this feature within our type system.</p>
+<p>integer types within haskell are polymorphic too. haskell has 4 type classes for handling integral
+types, Int, Integer, Float, and Double. the difference between Int and Integer, is that the Integer
+has arbitrary precision.</p>
+<p>ad-hoc or bounded polymorphism applies to the actual operations that are performed on types. an
+example of this is C++&rsquo;s operator overloading, which allows the user to write and rewrite the
+operations in which operators perform depending on the type. this is vital for generic programming,
+due to the fact that you could reuse a generic algorithm as long as the operators for the type/class
+had been properly implemented.</p>
+<p>this form of polymorphism has been implemented within haskell as well, in the form of type classes.
+with these type classes, we can define our own types, and the actions that operators within the
+language will perform on these types. this is possible since operators within haskell are also functions,
+as previously stated.</p>
+<p>important thing to note, the let keyword allows us to define variables within expressions. this is
+the usage of the keyword, as it was a bit confusing as to why this existed when you could leave
+it out when defining variables normally.</p>
+<h2 id="definition-higher-order-functions">definition: higher order functions<a href="#definition-higher-order-functions" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>higher order functions are functions which work with functions. this means that they can either
+have functions as parameters, or return functions as results. we can encode programming idioms,
+parsers, or algebraic properties within higher order functions.</p>
+<p>okay so rank n types seem to be a higher rank of parametric polymorphism, in the sense that we
+can apply the forall polymorphic attribute to the signature of our function. this allows our
+polymorphic function to operate with polymorphic functions.</p>
+<p>im having some trouble understanding exactly why this is necessary, or why this isnt part of the
+core language; and instead delegated to an extension? is this just a ghc specific feature not
+present within the standard?</p>
+<p>yea its only a ghc extension lol. there should be some pattern to achieve the same outcomes no?
+else this would be present within standard haskell as well.</p>
+<p>something that i had not realized before was the fact that untyped lambda calculus quite literally
+is untyped. in all the demonstrations that had been shown to me, plenty of them had been utilizing
+natural numbers within their demonstrations. i now realize that those are church numerals, and you
+can literally encode types within an untyped language. very cool.</p>
+<p>however i still dont understand why untyped lambda calculus is technically more &ldquo;powerful&rdquo; than
+simply typed lambda calculus. i get the fact that you can manually encode all types in the typed
+LC without the notation within the formal system, but that does not exactly explain why it is deemed
+more powerful. i have not found a resource that explains this as of yet.</p>
+
+      </div></div>
+
+  
+
+  
+  
+
+  
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2022 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://xcr0.github.io/assets/main.js"></script>
+<script src="https://xcr0.github.io/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

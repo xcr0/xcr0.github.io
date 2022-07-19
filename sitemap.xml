@@ -2,6 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://xcr0.github.io/notes/lc/</loc>
+    <lastmod>2022-07-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xcr0.github.io/notes/</loc>
+    <lastmod>2022-07-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xcr0.github.io/</loc>
+    <lastmod>2022-07-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xcr0.github.io/notes/hs/</loc>
+    <lastmod>2022-07-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xcr0.github.io/notes/arm/</loc>
+  </url><url>
+    <loc>https://xcr0.github.io/notes/pwn/</loc>
+  </url><url>
+    <loc>https://xcr0.github.io/notes/rev/</loc>
+  </url><url>
+    <loc>https://xcr0.github.io/notes/sat_smt/</loc>
+  </url><url>
+    <loc>https://xcr0.github.io/notes/toc/</loc>
+  </url><url>
     <loc>https://xcr0.github.io/showcase/</loc>
     <priority>0</priority>
   </url><url>
@@ -18,7 +40,5 @@
     <loc>https://xcr0.github.io/tags/testing/</loc>
   </url><url>
     <loc>https://xcr0.github.io/posts/welcome/</loc>
-  </url><url>
-    <loc>https://xcr0.github.io/</loc>
   </url>
 </urlset>
