@@ -192,12 +192,16 @@
         <li><a href="#peano-numbers">peano numbers</a></li>
       </ul>
     </li>
-    <li><a href="#combinatory-calculi">combinatory calculi</a></li>
     <li><a href="#the-fixed-point-theorem">the fixed point theorem</a></li>
     <li><a href="#bohms-theorem">bohm&rsquo;s theorem</a></li>
     <li><a href="#quasi-leftmost-reduction-theorem">quasi leftmost reduction theorem</a></li>
     <li><a href="#recursion-and-computation">recursion and computation</a></li>
-    <li><a href="#curry-howard-isomorphism">curry howard isomorphism</a></li>
+    <li><a href="#undecidability">undecidability</a></li>
+    <li><a href="#combinatory-calculi">combinatory calculi</a></li>
+    <li><a href="#de-brujin-indices">de brujin indices</a></li>
+    <li><a href="#ski-combinatory-calculus">ski combinatory calculus</a></li>
+    <li><a href="#ibcs-combinatory-calculus">ibcs combinatory calculus</a></li>
+    <li><a href="#y-combinator">y combinator</a></li>
     <li><a href="#simple-typing">simple typing</a></li>
     <li><a href="#subtyping">subtyping</a></li>
     <li><a href="#recursive-typing">recursive typing</a></li>
@@ -349,11 +353,6 @@ along with their associated operations.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hs" data-lang="hs"></code></pre></div><h3 id="scott-encoding">scott encoding<a href="#scott-encoding" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
 <p>scott encoding works under the same concept as the church encoding (which was previously demonstrated).</p>
 <h3 id="peano-numbers">peano numbers<a href="#peano-numbers" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
-<h2 id="combinatory-calculi">combinatory calculi<a href="#combinatory-calculi" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<p>combinatory calculi is rooted in the lambda calculus, but extends the system of logic by defining such
-things called combinators. we have previously touched on the concept of a combinator within a previous
-section of these notes, and the definition remains the same within combinatory calculi.</p>
-<p>as previously stated, a combinatory term is simply a function that contains no free variables.</p>
 <h2 id="the-fixed-point-theorem">the fixed point theorem<a href="#the-fixed-point-theorem" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>a fixed point of a function is a value that is mapped to itself by the function. in lambda calculus,
 the same concept applies in the sense that we can apply the same abstraction by itself, which
@@ -363,7 +362,16 @@ known as the Y combinator; is a means of defining recursion within the lambda ca
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hs" data-lang="hs"></code></pre></div><h2 id="bohms-theorem">bohm&rsquo;s theorem<a href="#bohms-theorem" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <h2 id="quasi-leftmost-reduction-theorem">quasi leftmost reduction theorem<a href="#quasi-leftmost-reduction-theorem" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <h2 id="recursion-and-computation">recursion and computation<a href="#recursion-and-computation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<h2 id="curry-howard-isomorphism">curry howard isomorphism<a href="#curry-howard-isomorphism" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="undecidability">undecidability<a href="#undecidability" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="combinatory-calculi">combinatory calculi<a href="#combinatory-calculi" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>combinatory calculi is a branch of mathematical logic which is rooted in the lambda calculus, but extends
+the system by eliminating the need for free variables. instead, it relies completely on the composition
+of a finite set of primitive combinatory terms. as we have previously defined, a combinatory term is simply
+a function that contains no free variables.</p>
+<h2 id="de-brujin-indices">de brujin indices<a href="#de-brujin-indices" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="ski-combinatory-calculus">ski combinatory calculus<a href="#ski-combinatory-calculus" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="ibcs-combinatory-calculus">ibcs combinatory calculus<a href="#ibcs-combinatory-calculus" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="y-combinator">y combinator<a href="#y-combinator" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <h2 id="simple-typing">simple typing<a href="#simple-typing" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <h2 id="subtyping">subtyping<a href="#subtyping" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <h2 id="recursive-typing">recursive typing<a href="#recursive-typing" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
@@ -533,6 +541,10 @@ corrected of the misconception.</p>
 <li><a href="https://en.wikipedia.org/wiki/Combinatory_logic">https://en.wikipedia.org/wiki/Combinatory_logic</a></li>
 <li><a href="https://www.amazon.com/Lambda-Calculus-Combinators-Introduction-Roger-Hindley/dp/0521898854">https://www.amazon.com/Lambda-Calculus-Combinators-Introduction-Roger-Hindley/dp/0521898854</a></li>
 <li><a href="https://encyclopediaofmath.org/wiki/Combinatory_logic">https://encyclopediaofmath.org/wiki/Combinatory_logic</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SKI_combinator_calculus">https://en.wikipedia.org/wiki/SKI_combinator_calculus</a></li>
+<li><a href="https://en.wikipedia.org/wiki/B,_C,_K,_W_system">https://en.wikipedia.org/wiki/B,_C,_K,_W_system</a></li>
+<li><a href="https://people.cs.uchicago.edu/~odonnell/Teacher/Lectures/Formal_Organization_of_Knowledge/Examples/combinator_calculus/">https://people.cs.uchicago.edu/~odonnell/Teacher/Lectures/Formal_Organization_of_Knowledge/Examples/combinator_calculus/</a></li>
+<li><a href="https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/Combinatory%20Logic%20in%20Programming.pdf">https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/Combinatory%20Logic%20in%20Programming.pdf</a></li>
 </ul>
 <h3 id="type-theory-not-homotopy-type-theory-hott-">type theory (not homotopy type theory (HoTT) )<a href="#type-theory-not-homotopy-type-theory-hott-" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
 <ul>

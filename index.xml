@@ -139,11 +139,6 @@ along with their associated operations.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-hs&#34; data-lang=&#34;hs&#34;&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;scott-encoding&#34;&gt;scott encoding&lt;/h3&gt;
 &lt;p&gt;scott encoding works under the same concept as the church encoding (which was previously demonstrated).&lt;/p&gt;
 &lt;h3 id=&#34;peano-numbers&#34;&gt;peano numbers&lt;/h3&gt;
-&lt;h2 id=&#34;combinatory-calculi&#34;&gt;combinatory calculi&lt;/h2&gt;
-&lt;p&gt;combinatory calculi is rooted in the lambda calculus, but extends the system of logic by defining such
-things called combinators. we have previously touched on the concept of a combinator within a previous
-section of these notes, and the definition remains the same within combinatory calculi.&lt;/p&gt;
-&lt;p&gt;as previously stated, a combinatory term is simply a function that contains no free variables.&lt;/p&gt;
 &lt;h2 id=&#34;the-fixed-point-theorem&#34;&gt;the fixed point theorem&lt;/h2&gt;
 &lt;p&gt;a fixed point of a function is a value that is mapped to itself by the function. in lambda calculus,
 the same concept applies in the sense that we can apply the same abstraction by itself, which
@@ -153,7 +148,16 @@ known as the Y combinator; is a means of defining recursion within the lambda ca
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-hs&#34; data-lang=&#34;hs&#34;&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;bohms-theorem&#34;&gt;bohm&amp;rsquo;s theorem&lt;/h2&gt;
 &lt;h2 id=&#34;quasi-leftmost-reduction-theorem&#34;&gt;quasi leftmost reduction theorem&lt;/h2&gt;
 &lt;h2 id=&#34;recursion-and-computation&#34;&gt;recursion and computation&lt;/h2&gt;
-&lt;h2 id=&#34;curry-howard-isomorphism&#34;&gt;curry howard isomorphism&lt;/h2&gt;
+&lt;h2 id=&#34;undecidability&#34;&gt;undecidability&lt;/h2&gt;
+&lt;h2 id=&#34;combinatory-calculi&#34;&gt;combinatory calculi&lt;/h2&gt;
+&lt;p&gt;combinatory calculi is a branch of mathematical logic which is rooted in the lambda calculus, but extends
+the system by eliminating the need for free variables. instead, it relies completely on the composition
+of a finite set of primitive combinatory terms. as we have previously defined, a combinatory term is simply
+a function that contains no free variables.&lt;/p&gt;
+&lt;h2 id=&#34;de-brujin-indices&#34;&gt;de brujin indices&lt;/h2&gt;
+&lt;h2 id=&#34;ski-combinatory-calculus&#34;&gt;ski combinatory calculus&lt;/h2&gt;
+&lt;h2 id=&#34;ibcs-combinatory-calculus&#34;&gt;ibcs combinatory calculus&lt;/h2&gt;
+&lt;h2 id=&#34;y-combinator&#34;&gt;y combinator&lt;/h2&gt;
 &lt;h2 id=&#34;simple-typing&#34;&gt;simple typing&lt;/h2&gt;
 &lt;h2 id=&#34;subtyping&#34;&gt;subtyping&lt;/h2&gt;
 &lt;h2 id=&#34;recursive-typing&#34;&gt;recursive typing&lt;/h2&gt;
@@ -323,6 +327,10 @@ corrected of the misconception.&lt;/p&gt;
 &lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Combinatory_logic&#34;&gt;https://en.wikipedia.org/wiki/Combinatory_logic&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.amazon.com/Lambda-Calculus-Combinators-Introduction-Roger-Hindley/dp/0521898854&#34;&gt;https://www.amazon.com/Lambda-Calculus-Combinators-Introduction-Roger-Hindley/dp/0521898854&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://encyclopediaofmath.org/wiki/Combinatory_logic&#34;&gt;https://encyclopediaofmath.org/wiki/Combinatory_logic&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/SKI_combinator_calculus&#34;&gt;https://en.wikipedia.org/wiki/SKI_combinator_calculus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/B,_C,_K,_W_system&#34;&gt;https://en.wikipedia.org/wiki/B,_C,_K,_W_system&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://people.cs.uchicago.edu/~odonnell/Teacher/Lectures/Formal_Organization_of_Knowledge/Examples/combinator_calculus/&#34;&gt;https://people.cs.uchicago.edu/~odonnell/Teacher/Lectures/Formal_Organization_of_Knowledge/Examples/combinator_calculus/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/Combinatory%20Logic%20in%20Programming.pdf&#34;&gt;https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/Combinatory%20Logic%20in%20Programming.pdf&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;type-theory-not-homotopy-type-theory-hott-&#34;&gt;type theory (not homotopy type theory (HoTT) )&lt;/h3&gt;
 &lt;ul&gt;
@@ -630,8 +638,8 @@ posts (if they are available at the time of viewing this).&lt;/p&gt;
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://xcr0.github.io/showcase/</guid>
-      <description>list accomplishments here..</description>
-      <content>&lt;p&gt;list accomplishments here..&lt;/p&gt;
+      <description>list accomplishments and projects here..</description>
+      <content>&lt;p&gt;list accomplishments and projects here..&lt;/p&gt;
 </content>
     </item>
     
