@@ -90,11 +90,10 @@ lambda abstraction which simply performs addition on the natural numbers.&lt;/p&
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;y&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; y)) &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;as we can see, beta reduction simply means subsituting the variables within the abstractions.&lt;/p&gt;
-&lt;h2 id=&#34;evaluation-order--reduction-strategy&#34;&gt;evaluation order / reduction strategy&lt;/h2&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;now as we can see, beta reduction simply means substituting the variables within the abstractions.&lt;/p&gt;
+&lt;h2 id=&#34;the-church-rosser-theorem&#34;&gt;the church-rosser theorem&lt;/h2&gt;
 &lt;p&gt;when applying variables to lambda abstractions, we also need to know the order in which we are
 reducing/evaluating the abstraction.&lt;/p&gt;
-&lt;h3 id=&#34;the-church-rosser-theorem&#34;&gt;the church-rosser theorem&lt;/h3&gt;
 &lt;p&gt;the church rosser theorem states that, &amp;ldquo;when applying reduction rules to terms, the ordering in
 which the reductions are chosen does not make a difference to the eventual result&amp;rdquo;. this theorem
 essentially states that the lambda calculus is confluent.&lt;/p&gt;
@@ -133,7 +132,7 @@ numbers.&lt;/p&gt;
 &lt;h4 id=&#34;church-predicates&#34;&gt;church predicates&lt;/h4&gt;
 &lt;h4 id=&#34;church-pairs&#34;&gt;church pairs&lt;/h4&gt;
 &lt;h4 id=&#34;church-lists&#34;&gt;church lists&lt;/h4&gt;
-&lt;h3 id=&#34;church-encoding-demo&#34;&gt;church encoding demo&lt;/h3&gt;
+&lt;h3 id=&#34;church-encoding-demonstration&#34;&gt;church encoding demonstration&lt;/h3&gt;
 &lt;p&gt;i find the concept of encoding types within an untyped language particularly interesting, so i have
 decided to further demonstrate this concept by encoding each monomorphic church type within haskell;
 along with their associated operations.&lt;/p&gt;
@@ -265,7 +264,7 @@ types; as opposed to allowing the compiler to perform implicit type casts.&lt;/l
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;static analysis is much more useful within a strongly typed languages as the analyzer knows each
-type of each operand within an expression.&lt;/li&gt;
+  type of each operand within an expression.&lt;/li&gt;
 &lt;li&gt;eliminates an entire class of bugs/vulnerabilities that are present within weakly typed language,
 such as type confusion and insecurity.&lt;/li&gt;
 &lt;/ul&gt;
@@ -307,6 +306,31 @@ via one of my contacts listed in my about page. i am always willing to learn mor
 misunderstood a concept throughout my process of self study, it would be a massive benefit to be
 corrected of the misconception.&lt;/p&gt;
 &lt;p&gt;thanks again for reading. have a great day uwu.&lt;/p&gt;
+&lt;h2 id=&#34;resources&#34;&gt;resources&lt;/h2&gt;
+&lt;p&gt;resources and references that were used in the making of my notes.&lt;/p&gt;
+&lt;h3 id=&#34;lambda-calculus&#34;&gt;lambda calculus&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://plato.stanford.edu/entries/lambda-calculus/&#34;&gt;https://plato.stanford.edu/entries/lambda-calculus/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Lambda_calculus&#34;&gt;https://en.wikipedia.org/wiki/Lambda_calculus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://math.stackexchange.com/questions/65622/whats-the-point-of-eta-conversion-in-lambda-calculus&#34;&gt;https://math.stackexchange.com/questions/65622/whats-the-point-of-eta-conversion-in-lambda-calculus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/55996764/lambda-eta-conversion-expansion-reduction-clarification&#34;&gt;https://stackoverflow.com/questions/55996764/lambda-eta-conversion-expansion-reduction-clarification&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Church%E2%80%93Rosser_theorem&#34;&gt;https://en.wikipedia.org/wiki/Church%E2%80%93Rosser_theorem&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/33509954/explaining-the-church-rosser-theorem-in-basic-terms&#34;&gt;https://stackoverflow.com/questions/33509954/explaining-the-church-rosser-theorem-in-basic-terms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Church_encoding&#34;&gt;https://en.wikipedia.org/wiki/Church_encoding&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;combinatory-calculi-1&#34;&gt;combinatory calculi&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Combinatory_logic&#34;&gt;https://en.wikipedia.org/wiki/Combinatory_logic&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/Lambda-Calculus-Combinators-Introduction-Roger-Hindley/dp/0521898854&#34;&gt;https://www.amazon.com/Lambda-Calculus-Combinators-Introduction-Roger-Hindley/dp/0521898854&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://encyclopediaofmath.org/wiki/Combinatory_logic&#34;&gt;https://encyclopediaofmath.org/wiki/Combinatory_logic&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;type-theory-not-homotopy-type-theory-hott-&#34;&gt;type theory (not homotopy type theory (HoTT) )&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Lambda_cube&#34;&gt;https://en.wikipedia.org/wiki/Lambda_cube&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://users.cs.northwestern.edu/~jesse/course/type-systems-wi18/type-notes/index.html&#34;&gt;https://users.cs.northwestern.edu/~jesse/course/type-systems-wi18/type-notes/index.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.mathemafrica.org/?p=13035&#34;&gt;http://www.mathemafrica.org/?p=13035&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/Types-Programming-Languages-MIT-Press/dp/0262162091&#34;&gt;https://www.amazon.com/Types-Programming-Languages-MIT-Press/dp/0262162091&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </content>
     </item>
     
@@ -403,16 +427,6 @@ more powerful. i have not found a resource that explains this as of yet.&lt;/p&g
     </item>
     
     <item>
-      <title></title>
-      <link>https://xcr0.github.io/showcase/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://xcr0.github.io/showcase/</guid>
-      <description></description>
-      <content></content>
-    </item>
-    
-    <item>
       <title>About</title>
       <link>https://xcr0.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -420,14 +434,16 @@ more powerful. i have not found a resource that explains this as of yet.&lt;/p&g
       <guid>https://xcr0.github.io/about/</guid>
       <description>Hi I&amp;rsquo;m xcr0. My interests include programming, compiler development, theoretical computer science, vulnerability research, reverse engineering, and ctf.
 You can find me via any of the contacts listed below.
-Keybase Github Twitter PGP: CC142B6F68880A9458136676D3DCCFFC5ED57822 </description>
+Matrix: @xcr0:matrix.org Keybase Github Twitter Email PGP: CC142B6F68880A9458136676D3DCCFFC5ED57822 </description>
       <content>&lt;p&gt;Hi I&amp;rsquo;m xcr0. My interests include programming, compiler development, theoretical computer science,
 vulnerability research, reverse engineering, and ctf.&lt;/p&gt;
 &lt;p&gt;You can find me via any of the contacts listed below.&lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;Matrix: @xcr0:matrix.org&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://keybase.io/xcr0/&#34;&gt;Keybase&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/xcr0/&#34;&gt;Github&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://twitter.com/extcr0/&#34;&gt;Twitter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;sendto:extcr0@protonmail.com&#34;&gt;Email&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://xcr0.github.io/pgp&#34;&gt;PGP: CC142B6F68880A9458136676D3DCCFFC5ED57822&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
@@ -445,13 +461,82 @@ vulnerability research, reverse engineering, and ctf.&lt;/p&gt;
     </item>
     
     <item>
-      <title>PGP: CC142B6F68880A9458136676D3DCCFFC5ED57822</title>
+      <title>Category Theory</title>
+      <link>https://xcr0.github.io/notes/cg/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xcr0.github.io/notes/cg/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>Compiler Optimizations</title>
+      <link>https://xcr0.github.io/notes/opt/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xcr0.github.io/notes/opt/</guid>
+      <description>wip&amp;hellip;</description>
+      <content>&lt;p&gt;wip&amp;hellip;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Decompilers</title>
+      <link>https://xcr0.github.io/notes/dec/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xcr0.github.io/notes/dec/</guid>
+      <description>wip&amp;hellip;
+preface a large reason as to why i wanted to create a collection of notes, information, and references on decompilers is primarily due to the fact that its such an obscure craft.
+i have personally never known of any class of software that was as difficult to find resources on as decompilers. hell even the documentation for open source decompilers like ghidra and snowman are lackluster.
+however, there is not a single tutorial on the internet on how to actually write a machine code decompiler.</description>
+      <content>&lt;p&gt;wip&amp;hellip;&lt;/p&gt;
+&lt;h2 id=&#34;preface&#34;&gt;preface&lt;/h2&gt;
+&lt;p&gt;a large reason as to why i wanted to create a collection of notes, information,
+and references on decompilers is primarily due to the fact that its such an
+obscure craft.&lt;/p&gt;
+&lt;p&gt;i have personally never known of any class of software that was as difficult
+to find resources on as decompilers. hell even the documentation for open
+source decompilers like ghidra and snowman are lackluster.&lt;/p&gt;
+&lt;p&gt;however, there is not a single tutorial on the internet on how to actually
+write a machine code decompiler. you would think that there would be plenty
+of tutorial on this subject given the amount of compiler development tutorials
+that exist; but to this day i have not found any.&lt;/p&gt;
+&lt;p&gt;so ive decided that ill be the self proclaimed &amp;ldquo;first&amp;rdquo; to tackle such an
+obscure and complex piece of software, and hopefully write a coherent and
+self contained tutorial on decompiler development.&lt;/p&gt;
+&lt;p&gt;these are the notes and references that ive collected, if you want to view
+the tutorial, please view the &amp;ldquo;Decompiler Development&amp;rdquo; series within my
+posts (if they are available at the time of viewing this).&lt;/p&gt;
+&lt;h2 id=&#34;resources&#34;&gt;Resources&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;todo..&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Parsing Techniques and Theory</title>
+      <link>https://xcr0.github.io/notes/prs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xcr0.github.io/notes/prs/</guid>
+      <description>wip&amp;hellip;</description>
+      <content>&lt;p&gt;wip&amp;hellip;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>PGP</title>
       <link>https://xcr0.github.io/pgp/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://xcr0.github.io/pgp/</guid>
-      <description>-----BEGIN PGP PUBLIC KEY BLOCK----- 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 yA== =2bi3 -----END PGP PUBLIC KEY BLOCK----- </description>
-      <content>&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-----BEGIN PGP PUBLIC KEY BLOCK-----
+      <description>Signature: CC142B6F68880A9458136676D3DCCFFC5ED57822
+-----BEGIN PGP PUBLIC KEY BLOCK----- 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 yA== =2bi3 -----END PGP PUBLIC KEY BLOCK----- </description>
+      <content>&lt;p&gt;Signature: CC142B6F68880A9458136676D3DCCFFC5ED57822&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-----BEGIN PGP PUBLIC KEY BLOCK-----
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mQINBGLT/VMBEADrCut6vfdgQXh2DDVDXj7PM97qyEtS0U9wknXPNFWoXXM5eKUx
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8r9dwgvNGkTPHKkPlFKocT6eJkOUqqL3crufCsjniYKhneE22y7R2znCup3RbNWj
@@ -530,12 +615,23 @@ vulnerability research, reverse engineering, and ctf.&lt;/p&gt;
     
     <item>
       <title>SAT/SMT</title>
-      <link>https://xcr0.github.io/notes/sat_smt/</link>
+      <link>https://xcr0.github.io/notes/sat/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://xcr0.github.io/notes/sat_smt/</guid>
+      <guid>https://xcr0.github.io/notes/sat/</guid>
       <description>wip&amp;hellip;</description>
       <content>&lt;p&gt;wip&amp;hellip;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Showcase</title>
+      <link>https://xcr0.github.io/showcase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xcr0.github.io/showcase/</guid>
+      <description>list accomplishments here..</description>
+      <content>&lt;p&gt;list accomplishments here..&lt;/p&gt;
 </content>
     </item>
     

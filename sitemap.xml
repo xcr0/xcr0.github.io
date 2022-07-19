@@ -14,14 +14,19 @@
     <loc>https://xcr0.github.io/notes/hs/</loc>
     <lastmod>2022-07-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://xcr0.github.io/showcase/</loc>
-    <priority>0</priority>
-  </url><url>
     <loc>https://xcr0.github.io/about/</loc>
   </url><url>
     <loc>https://xcr0.github.io/notes/arm/</loc>
   </url><url>
     <loc>https://xcr0.github.io/categories/</loc>
+  </url><url>
+    <loc>https://xcr0.github.io/notes/cg/</loc>
+  </url><url>
+    <loc>https://xcr0.github.io/notes/opt/</loc>
+  </url><url>
+    <loc>https://xcr0.github.io/notes/dec/</loc>
+  </url><url>
+    <loc>https://xcr0.github.io/notes/prs/</loc>
   </url><url>
     <loc>https://xcr0.github.io/pgp/</loc>
   </url><url>
@@ -31,7 +36,9 @@
   </url><url>
     <loc>https://xcr0.github.io/notes/rev/</loc>
   </url><url>
-    <loc>https://xcr0.github.io/notes/sat_smt/</loc>
+    <loc>https://xcr0.github.io/notes/sat/</loc>
+  </url><url>
+    <loc>https://xcr0.github.io/showcase/</loc>
   </url><url>
     <loc>https://xcr0.github.io/tags/</loc>
   </url><url>

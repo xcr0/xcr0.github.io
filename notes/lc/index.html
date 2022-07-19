@@ -177,11 +177,7 @@
     <li><a href="#currying">currying</a></li>
     <li><a href="#free-and-bound-variables--closure--combinators">free and bound variables | closure &amp; combinators</a></li>
     <li><a href="#beta-reduction">beta reduction</a></li>
-    <li><a href="#evaluation-order--reduction-strategy">evaluation order / reduction strategy</a>
-      <ul>
-        <li><a href="#the-church-rosser-theorem">the church-rosser theorem</a></li>
-      </ul>
-    </li>
+    <li><a href="#the-church-rosser-theorem">the church-rosser theorem</a></li>
     <li><a href="#beta-normal-form">beta normal form</a></li>
     <li><a href="#beta-equivalence">beta equivalence</a></li>
     <li><a href="#alpha-conversion">alpha conversion</a></li>
@@ -191,7 +187,7 @@
     <li><a href="#encoding-types">encoding types</a>
       <ul>
         <li><a href="#church-encoding">church encoding</a></li>
-        <li><a href="#church-encoding-demo">church encoding demo</a></li>
+        <li><a href="#church-encoding-demonstration">church encoding demonstration</a></li>
         <li><a href="#scott-encoding">scott encoding</a></li>
         <li><a href="#peano-numbers">peano numbers</a></li>
       </ul>
@@ -216,6 +212,13 @@
     <li><a href="#weakly-typed">weakly typed</a></li>
     <li><a href="#pythons-type-checking-system">python&rsquo;s type checking system</a></li>
     <li><a href="#conclusion">conclusion</a></li>
+    <li><a href="#resources">resources</a>
+      <ul>
+        <li><a href="#lambda-calculus">lambda calculus</a></li>
+        <li><a href="#combinatory-calculi-1">combinatory calculi</a></li>
+        <li><a href="#type-theory-not-homotopy-type-theory-hott-">type theory (not homotopy type theory (HoTT) )</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -297,11 +300,10 @@ lambda abstraction which simply performs addition on the natural numbers.</p>
 </span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span><span style="color:#f92672">.</span> (<span style="color:#a6e22e">\</span>y<span style="color:#f92672">.</span>(<span style="color:#ae81ff">20</span> <span style="color:#f92672">+</span> y)) <span style="color:#ae81ff">10</span>
 </span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span><span style="color:#f92672">.</span> (<span style="color:#ae81ff">20</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span>)
 </span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span><span style="color:#f92672">.</span> <span style="color:#ae81ff">30</span>
-</span></span></code></pre></div><p>as we can see, beta reduction simply means subsituting the variables within the abstractions.</p>
-<h2 id="evaluation-order--reduction-strategy">evaluation order / reduction strategy<a href="#evaluation-order--reduction-strategy" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+</span></span></code></pre></div><p>now as we can see, beta reduction simply means substituting the variables within the abstractions.</p>
+<h2 id="the-church-rosser-theorem">the church-rosser theorem<a href="#the-church-rosser-theorem" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>when applying variables to lambda abstractions, we also need to know the order in which we are
 reducing/evaluating the abstraction.</p>
-<h3 id="the-church-rosser-theorem">the church-rosser theorem<a href="#the-church-rosser-theorem" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
 <p>the church rosser theorem states that, &ldquo;when applying reduction rules to terms, the ordering in
 which the reductions are chosen does not make a difference to the eventual result&rdquo;. this theorem
 essentially states that the lambda calculus is confluent.</p>
@@ -340,7 +342,7 @@ numbers.</p>
 <h4 id="church-predicates">church predicates<a href="#church-predicates" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
 <h4 id="church-pairs">church pairs<a href="#church-pairs" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
 <h4 id="church-lists">church lists<a href="#church-lists" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
-<h3 id="church-encoding-demo">church encoding demo<a href="#church-encoding-demo" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<h3 id="church-encoding-demonstration">church encoding demonstration<a href="#church-encoding-demonstration" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
 <p>i find the concept of encoding types within an untyped language particularly interesting, so i have
 decided to further demonstrate this concept by encoding each monomorphic church type within haskell;
 along with their associated operations.</p>
@@ -472,7 +474,7 @@ types; as opposed to allowing the compiler to perform implicit type casts.</li>
 </ul>
 </li>
 <li>static analysis is much more useful within a strongly typed languages as the analyzer knows each
-type of each operand within an expression.</li>
+  type of each operand within an expression.</li>
 <li>eliminates an entire class of bugs/vulnerabilities that are present within weakly typed language,
 such as type confusion and insecurity.</li>
 </ul>
@@ -514,6 +516,31 @@ via one of my contacts listed in my about page. i am always willing to learn mor
 misunderstood a concept throughout my process of self study, it would be a massive benefit to be
 corrected of the misconception.</p>
 <p>thanks again for reading. have a great day uwu.</p>
+<h2 id="resources">resources<a href="#resources" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>resources and references that were used in the making of my notes.</p>
+<h3 id="lambda-calculus">lambda calculus<a href="#lambda-calculus" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<ul>
+<li><a href="https://plato.stanford.edu/entries/lambda-calculus/">https://plato.stanford.edu/entries/lambda-calculus/</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Lambda_calculus">https://en.wikipedia.org/wiki/Lambda_calculus</a></li>
+<li><a href="https://math.stackexchange.com/questions/65622/whats-the-point-of-eta-conversion-in-lambda-calculus">https://math.stackexchange.com/questions/65622/whats-the-point-of-eta-conversion-in-lambda-calculus</a></li>
+<li><a href="https://stackoverflow.com/questions/55996764/lambda-eta-conversion-expansion-reduction-clarification">https://stackoverflow.com/questions/55996764/lambda-eta-conversion-expansion-reduction-clarification</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Church%E2%80%93Rosser_theorem">https://en.wikipedia.org/wiki/Church%E2%80%93Rosser_theorem</a></li>
+<li><a href="https://stackoverflow.com/questions/33509954/explaining-the-church-rosser-theorem-in-basic-terms">https://stackoverflow.com/questions/33509954/explaining-the-church-rosser-theorem-in-basic-terms</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Church_encoding">https://en.wikipedia.org/wiki/Church_encoding</a></li>
+</ul>
+<h3 id="combinatory-calculi-1">combinatory calculi<a href="#combinatory-calculi-1" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Combinatory_logic">https://en.wikipedia.org/wiki/Combinatory_logic</a></li>
+<li><a href="https://www.amazon.com/Lambda-Calculus-Combinators-Introduction-Roger-Hindley/dp/0521898854">https://www.amazon.com/Lambda-Calculus-Combinators-Introduction-Roger-Hindley/dp/0521898854</a></li>
+<li><a href="https://encyclopediaofmath.org/wiki/Combinatory_logic">https://encyclopediaofmath.org/wiki/Combinatory_logic</a></li>
+</ul>
+<h3 id="type-theory-not-homotopy-type-theory-hott-">type theory (not homotopy type theory (HoTT) )<a href="#type-theory-not-homotopy-type-theory-hott-" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Lambda_cube">https://en.wikipedia.org/wiki/Lambda_cube</a></li>
+<li><a href="https://users.cs.northwestern.edu/~jesse/course/type-systems-wi18/type-notes/index.html">https://users.cs.northwestern.edu/~jesse/course/type-systems-wi18/type-notes/index.html</a></li>
+<li><a href="http://www.mathemafrica.org/?p=13035">http://www.mathemafrica.org/?p=13035</a></li>
+<li><a href="https://www.amazon.com/Types-Programming-Languages-MIT-Press/dp/0262162091">https://www.amazon.com/Types-Programming-Languages-MIT-Press/dp/0262162091</a></li>
+</ul>
 
       </div></div>
 

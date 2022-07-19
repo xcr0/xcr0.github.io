@@ -90,11 +90,10 @@ lambda abstraction which simply performs addition on the natural numbers.&lt;/p&
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;y&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; y)) &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;as we can see, beta reduction simply means subsituting the variables within the abstractions.&lt;/p&gt;
-&lt;h2 id=&#34;evaluation-order--reduction-strategy&#34;&gt;evaluation order / reduction strategy&lt;/h2&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;now as we can see, beta reduction simply means substituting the variables within the abstractions.&lt;/p&gt;
+&lt;h2 id=&#34;the-church-rosser-theorem&#34;&gt;the church-rosser theorem&lt;/h2&gt;
 &lt;p&gt;when applying variables to lambda abstractions, we also need to know the order in which we are
 reducing/evaluating the abstraction.&lt;/p&gt;
-&lt;h3 id=&#34;the-church-rosser-theorem&#34;&gt;the church-rosser theorem&lt;/h3&gt;
 &lt;p&gt;the church rosser theorem states that, &amp;ldquo;when applying reduction rules to terms, the ordering in
 which the reductions are chosen does not make a difference to the eventual result&amp;rdquo;. this theorem
 essentially states that the lambda calculus is confluent.&lt;/p&gt;
@@ -133,7 +132,7 @@ numbers.&lt;/p&gt;
 &lt;h4 id=&#34;church-predicates&#34;&gt;church predicates&lt;/h4&gt;
 &lt;h4 id=&#34;church-pairs&#34;&gt;church pairs&lt;/h4&gt;
 &lt;h4 id=&#34;church-lists&#34;&gt;church lists&lt;/h4&gt;
-&lt;h3 id=&#34;church-encoding-demo&#34;&gt;church encoding demo&lt;/h3&gt;
+&lt;h3 id=&#34;church-encoding-demonstration&#34;&gt;church encoding demonstration&lt;/h3&gt;
 &lt;p&gt;i find the concept of encoding types within an untyped language particularly interesting, so i have
 decided to further demonstrate this concept by encoding each monomorphic church type within haskell;
 along with their associated operations.&lt;/p&gt;
@@ -265,7 +264,7 @@ types; as opposed to allowing the compiler to perform implicit type casts.&lt;/l
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;static analysis is much more useful within a strongly typed languages as the analyzer knows each
-type of each operand within an expression.&lt;/li&gt;
+  type of each operand within an expression.&lt;/li&gt;
 &lt;li&gt;eliminates an entire class of bugs/vulnerabilities that are present within weakly typed language,
 such as type confusion and insecurity.&lt;/li&gt;
 &lt;/ul&gt;
@@ -307,6 +306,31 @@ via one of my contacts listed in my about page. i am always willing to learn mor
 misunderstood a concept throughout my process of self study, it would be a massive benefit to be
 corrected of the misconception.&lt;/p&gt;
 &lt;p&gt;thanks again for reading. have a great day uwu.&lt;/p&gt;
+&lt;h2 id=&#34;resources&#34;&gt;resources&lt;/h2&gt;
+&lt;p&gt;resources and references that were used in the making of my notes.&lt;/p&gt;
+&lt;h3 id=&#34;lambda-calculus&#34;&gt;lambda calculus&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://plato.stanford.edu/entries/lambda-calculus/&#34;&gt;https://plato.stanford.edu/entries/lambda-calculus/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Lambda_calculus&#34;&gt;https://en.wikipedia.org/wiki/Lambda_calculus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://math.stackexchange.com/questions/65622/whats-the-point-of-eta-conversion-in-lambda-calculus&#34;&gt;https://math.stackexchange.com/questions/65622/whats-the-point-of-eta-conversion-in-lambda-calculus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/55996764/lambda-eta-conversion-expansion-reduction-clarification&#34;&gt;https://stackoverflow.com/questions/55996764/lambda-eta-conversion-expansion-reduction-clarification&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Church%E2%80%93Rosser_theorem&#34;&gt;https://en.wikipedia.org/wiki/Church%E2%80%93Rosser_theorem&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/33509954/explaining-the-church-rosser-theorem-in-basic-terms&#34;&gt;https://stackoverflow.com/questions/33509954/explaining-the-church-rosser-theorem-in-basic-terms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Church_encoding&#34;&gt;https://en.wikipedia.org/wiki/Church_encoding&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;combinatory-calculi-1&#34;&gt;combinatory calculi&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Combinatory_logic&#34;&gt;https://en.wikipedia.org/wiki/Combinatory_logic&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/Lambda-Calculus-Combinators-Introduction-Roger-Hindley/dp/0521898854&#34;&gt;https://www.amazon.com/Lambda-Calculus-Combinators-Introduction-Roger-Hindley/dp/0521898854&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://encyclopediaofmath.org/wiki/Combinatory_logic&#34;&gt;https://encyclopediaofmath.org/wiki/Combinatory_logic&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;type-theory-not-homotopy-type-theory-hott-&#34;&gt;type theory (not homotopy type theory (HoTT) )&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Lambda_cube&#34;&gt;https://en.wikipedia.org/wiki/Lambda_cube&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://users.cs.northwestern.edu/~jesse/course/type-systems-wi18/type-notes/index.html&#34;&gt;https://users.cs.northwestern.edu/~jesse/course/type-systems-wi18/type-notes/index.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.mathemafrica.org/?p=13035&#34;&gt;http://www.mathemafrica.org/?p=13035&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/Types-Programming-Languages-MIT-Press/dp/0262162091&#34;&gt;https://www.amazon.com/Types-Programming-Languages-MIT-Press/dp/0262162091&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </content>
     </item>
     
@@ -414,6 +438,73 @@ more powerful. i have not found a resource that explains this as of yet.&lt;/p&g
     </item>
     
     <item>
+      <title>Category Theory</title>
+      <link>https://xcr0.github.io/notes/cg/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xcr0.github.io/notes/cg/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>Compiler Optimizations</title>
+      <link>https://xcr0.github.io/notes/opt/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xcr0.github.io/notes/opt/</guid>
+      <description>wip&amp;hellip;</description>
+      <content>&lt;p&gt;wip&amp;hellip;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Decompilers</title>
+      <link>https://xcr0.github.io/notes/dec/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xcr0.github.io/notes/dec/</guid>
+      <description>wip&amp;hellip;
+preface a large reason as to why i wanted to create a collection of notes, information, and references on decompilers is primarily due to the fact that its such an obscure craft.
+i have personally never known of any class of software that was as difficult to find resources on as decompilers. hell even the documentation for open source decompilers like ghidra and snowman are lackluster.
+however, there is not a single tutorial on the internet on how to actually write a machine code decompiler.</description>
+      <content>&lt;p&gt;wip&amp;hellip;&lt;/p&gt;
+&lt;h2 id=&#34;preface&#34;&gt;preface&lt;/h2&gt;
+&lt;p&gt;a large reason as to why i wanted to create a collection of notes, information,
+and references on decompilers is primarily due to the fact that its such an
+obscure craft.&lt;/p&gt;
+&lt;p&gt;i have personally never known of any class of software that was as difficult
+to find resources on as decompilers. hell even the documentation for open
+source decompilers like ghidra and snowman are lackluster.&lt;/p&gt;
+&lt;p&gt;however, there is not a single tutorial on the internet on how to actually
+write a machine code decompiler. you would think that there would be plenty
+of tutorial on this subject given the amount of compiler development tutorials
+that exist; but to this day i have not found any.&lt;/p&gt;
+&lt;p&gt;so ive decided that ill be the self proclaimed &amp;ldquo;first&amp;rdquo; to tackle such an
+obscure and complex piece of software, and hopefully write a coherent and
+self contained tutorial on decompiler development.&lt;/p&gt;
+&lt;p&gt;these are the notes and references that ive collected, if you want to view
+the tutorial, please view the &amp;ldquo;Decompiler Development&amp;rdquo; series within my
+posts (if they are available at the time of viewing this).&lt;/p&gt;
+&lt;h2 id=&#34;resources&#34;&gt;Resources&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;todo..&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Parsing Techniques and Theory</title>
+      <link>https://xcr0.github.io/notes/prs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xcr0.github.io/notes/prs/</guid>
+      <description>wip&amp;hellip;</description>
+      <content>&lt;p&gt;wip&amp;hellip;&lt;/p&gt;
+</content>
+    </item>
+    
+    <item>
       <title>Pwn</title>
       <link>https://xcr0.github.io/notes/pwn/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -437,10 +528,10 @@ more powerful. i have not found a resource that explains this as of yet.&lt;/p&g
     
     <item>
       <title>SAT/SMT</title>
-      <link>https://xcr0.github.io/notes/sat_smt/</link>
+      <link>https://xcr0.github.io/notes/sat/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://xcr0.github.io/notes/sat_smt/</guid>
+      <guid>https://xcr0.github.io/notes/sat/</guid>
       <description>wip&amp;hellip;</description>
       <content>&lt;p&gt;wip&amp;hellip;&lt;/p&gt;
 </content>
