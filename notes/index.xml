@@ -362,56 +362,67 @@ more powerful. i have not found a resource that explains this as of yet.&lt;/p&g
     </item>
     
     <item>
-      <title></title>
+      <title>ARM</title>
       <link>https://xcr0.github.io/notes/arm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://xcr0.github.io/notes/arm/</guid>
-      <description></description>
-      <content></content>
+      <description>wip&amp;hellip;</description>
+      <content>&lt;p&gt;wip&amp;hellip;&lt;/p&gt;
+</content>
     </item>
     
     <item>
-      <title></title>
+      <title>Pwn</title>
       <link>https://xcr0.github.io/notes/pwn/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://xcr0.github.io/notes/pwn/</guid>
-      <description></description>
-      <content></content>
+      <description>wip&amp;hellip;</description>
+      <content>&lt;p&gt;wip&amp;hellip;&lt;/p&gt;
+</content>
     </item>
     
     <item>
-      <title></title>
+      <title>Rev</title>
       <link>https://xcr0.github.io/notes/rev/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://xcr0.github.io/notes/rev/</guid>
-      <description></description>
-      <content></content>
+      <description>wip&amp;hellip;</description>
+      <content>&lt;p&gt;wip&amp;hellip;&lt;/p&gt;
+</content>
     </item>
     
     <item>
-      <title></title>
+      <title>SAT/SMT</title>
       <link>https://xcr0.github.io/notes/sat_smt/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://xcr0.github.io/notes/sat_smt/</guid>
-      <description></description>
-      <content></content>
+      <description>wip&amp;hellip;</description>
+      <content>&lt;p&gt;wip&amp;hellip;&lt;/p&gt;
+</content>
     </item>
     
     <item>
-      <title></title>
+      <title>Theory of Computation</title>
       <link>https://xcr0.github.io/notes/toc/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://xcr0.github.io/notes/toc/</guid>
-      <description>notes on the theory of computation majority of these notes were taken throughout the course of reading sipser 3rd edition.
-chomsky hierarchy determinism and nondeterminism finite state automata mealy and moore machines push down automata linear bound automata the turing machine the halting problem </description>
-      <content>&lt;h1 id=&#34;notes-on-the-theory-of-computation&#34;&gt;notes on the theory of computation&lt;/h1&gt;
+      <description>wip&amp;hellip;
+notes on the theory of computation majority of these notes were taken throughout the course of reading sipser 3rd edition.
+chomsky hierarchy regular languages context free languages context sensitive languages recursively enumerable languages undecidability determinism and nondeterminism finite state automata mealy and moore machines push down automata linear bound automata the turing machine the halting problem complexity theory </description>
+      <content>&lt;p&gt;wip&amp;hellip;&lt;/p&gt;
+&lt;h1 id=&#34;notes-on-the-theory-of-computation&#34;&gt;notes on the theory of computation&lt;/h1&gt;
 &lt;p&gt;majority of these notes were taken throughout the course of reading sipser 3rd edition.&lt;/p&gt;
 &lt;h2 id=&#34;chomsky-hierarchy&#34;&gt;chomsky hierarchy&lt;/h2&gt;
+&lt;h2 id=&#34;regular-languages&#34;&gt;regular languages&lt;/h2&gt;
+&lt;h2 id=&#34;context-free-languages&#34;&gt;context free languages&lt;/h2&gt;
+&lt;h2 id=&#34;context-sensitive-languages&#34;&gt;context sensitive languages&lt;/h2&gt;
+&lt;h2 id=&#34;recursively-enumerable-languages&#34;&gt;recursively enumerable languages&lt;/h2&gt;
+&lt;h2 id=&#34;undecidability&#34;&gt;undecidability&lt;/h2&gt;
 &lt;h2 id=&#34;determinism-and-nondeterminism&#34;&gt;determinism and nondeterminism&lt;/h2&gt;
 &lt;h2 id=&#34;finite-state-automata&#34;&gt;finite state automata&lt;/h2&gt;
 &lt;h2 id=&#34;mealy-and-moore-machines&#34;&gt;mealy and moore machines&lt;/h2&gt;
@@ -419,6 +430,7 @@ chomsky hierarchy determinism and nondeterminism finite state automata mealy and
 &lt;h2 id=&#34;linear-bound-automata&#34;&gt;linear bound automata&lt;/h2&gt;
 &lt;h2 id=&#34;the-turing-machine&#34;&gt;the turing machine&lt;/h2&gt;
 &lt;h2 id=&#34;the-halting-problem&#34;&gt;the halting problem&lt;/h2&gt;
+&lt;h2 id=&#34;complexity-theory&#34;&gt;complexity theory&lt;/h2&gt;
 </content>
     </item>
     
