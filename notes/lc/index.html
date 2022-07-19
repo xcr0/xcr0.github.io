@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   
-    <title>Lambda Calculus :: xcr0</title>
+    <title>Lambda Calculus, Combinatory Logic, and Type Theory :: xcr0</title>
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="notes on the lambda calculus" />
+<meta name="description" content="notes on the lambda calculus, combinatory calculi, and type theory" />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="https://xcr0.github.io/notes/lc/" />
@@ -40,8 +40,8 @@
 
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="Lambda Calculus">
-<meta property="og:description" content="notes on the lambda calculus" />
+<meta property="og:title" content="Lambda Calculus, Combinatory Logic, and Type Theory">
+<meta property="og:description" content="notes on the lambda calculus, combinatory calculi, and type theory" />
 <meta property="og:url" content="https://xcr0.github.io/notes/lc/" />
 <meta property="og:site_name" content="xcr0" />
 
@@ -143,7 +143,7 @@
     
 <div class="post">
   <h1 class="post-title">
-    <a href="https://xcr0.github.io/notes/lc/">Lambda Calculus</a></h1>
+    <a href="https://xcr0.github.io/notes/lc/">Lambda Calculus, Combinatory Logic, and Type Theory</a></h1>
   <div class="post-meta">
     
       <span class="post-date">
@@ -168,28 +168,46 @@
       </h2>
       <nav id="TableOfContents">
   <ul>
-    <li><a href="#basic-syntax">basic syntax</a></li>
-    <li><a href="#free-and-bound-variables--closure--combinators">free and bound variables | closure &amp; combinators</a></li>
+    <li><a href="#the-lambda-calculus">the lambda calculus</a></li>
+    <li><a href="#basic-syntax">basic syntax</a>
+      <ul>
+        <li><a href="#disclaimer">disclaimer</a></li>
+      </ul>
+    </li>
     <li><a href="#currying">currying</a></li>
+    <li><a href="#free-and-bound-variables--closure--combinators">free and bound variables | closure &amp; combinators</a></li>
     <li><a href="#beta-reduction">beta reduction</a></li>
-    <li><a href="#evaluation-order">evaluation order</a></li>
+    <li><a href="#evaluation-order--reduction-strategy">evaluation order / reduction strategy</a>
+      <ul>
+        <li><a href="#the-church-rosser-theorem">the church-rosser theorem</a></li>
+      </ul>
+    </li>
     <li><a href="#beta-normal-form">beta normal form</a></li>
     <li><a href="#beta-equivalence">beta equivalence</a></li>
     <li><a href="#alpha-conversion">alpha conversion</a></li>
     <li><a href="#alpha-equivalence">alpha equivalence</a></li>
     <li><a href="#eta-conversion">eta conversion</a></li>
     <li><a href="#eta-reduction">eta reduction</a></li>
-    <li><a href="#encoding-types">encoding types</a></li>
-    <li><a href="#fixed-point-and-recursion">fixed point and recursion</a></li>
-    <li><a href="#combinatory-logic">combinatory logic</a></li>
+    <li><a href="#encoding-types">encoding types</a>
+      <ul>
+        <li><a href="#church-encoding">church encoding</a></li>
+        <li><a href="#church-encoding-demo">church encoding demo</a></li>
+        <li><a href="#scott-encoding">scott encoding</a></li>
+        <li><a href="#peano-numbers">peano numbers</a></li>
+      </ul>
+    </li>
+    <li><a href="#combinatory-calculi">combinatory calculi</a></li>
+    <li><a href="#the-fixed-point-theorem">the fixed point theorem</a></li>
+    <li><a href="#bohms-theorem">bohm&rsquo;s theorem</a></li>
+    <li><a href="#quasi-leftmost-reduction-theorem">quasi leftmost reduction theorem</a></li>
+    <li><a href="#recursion-and-computation">recursion and computation</a></li>
     <li><a href="#curry-howard-isomorphism">curry howard isomorphism</a></li>
-    <li><a href="#godels-incompleteness-theorem">godels incompleteness theorem</a></li>
-    <li><a href="#simply-typed-lambda-calculus">simply typed lambda calculus</a></li>
+    <li><a href="#simple-typing">simple typing</a></li>
     <li><a href="#subtyping">subtyping</a></li>
-    <li><a href="#recursive-types">recursive types</a></li>
-    <li><a href="#system-f">system F</a></li>
-    <li><a href="#hindley-milner-type-system">hindley milner type system</a></li>
-    <li><a href="#hindley-milner-type-inference-algorithm">hindley milner type inference algorithm</a></li>
+    <li><a href="#recursive-typing">recursive typing</a></li>
+    <li><a href="#system-f-and-polymorphism">system F and polymorphism</a></li>
+    <li><a href="#the-hindley-milner-type-system">the hindley milner type system</a></li>
+    <li><a href="#hindley-milner-type-inference">hindley milner type inference</a></li>
     <li><a href="#higher-order-type-systems">higher order type systems</a></li>
     <li><a href="#the-lambda-cube">the lambda cube</a></li>
     <li><a href="#static-typing">static typing</a></li>
@@ -204,7 +222,7 @@
   
 
   <div class="post-content"><div>
-        <h1 id="preface">preface<a href="#preface" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+        <h2 id="the-lambda-calculus">the lambda calculus<a href="#the-lambda-calculus" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>something that i have noticed about the lambda calculus is the fact that it is very simple given a
 programming background; but is full of strange and mysterious names for simple concepts that we
 programmers see in everyday life.</p>
@@ -222,10 +240,31 @@ if not all programming languages shown today. so by definition, the lambda calcu
 bare minimum for a programming language. (with the exception of smaller formal systems such as iota/jot/zot).</p>
 <h2 id="basic-syntax">basic syntax<a href="#basic-syntax" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>the basic syntax of the lambda calculus is as follows</p>
-<pre tabindex="0"><code>&lt;term&gt; -&gt; &lt;variable&gt;
-      | λ &lt;variable&gt;. &lt;variable&gt;
-      | ( &lt;term&gt; &lt;term&gt; )
-</code></pre><h2 id="free-and-bound-variables--closure--combinators">free and bound variables | closure &amp; combinators<a href="#free-and-bound-variables--closure--combinators" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hs" data-lang="hs"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>term<span style="color:#f92672">&gt;</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">&lt;</span>variable<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">|</span> λ <span style="color:#f92672">&lt;</span>variable<span style="color:#f92672">&gt;.</span> <span style="color:#f92672">&lt;</span>variable<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">|</span> ( <span style="color:#f92672">&lt;</span>term<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&lt;</span>term<span style="color:#f92672">&gt;</span> )
+</span></span></code></pre></div><p>the syntax for the system of logic is so incredibly simple, but as we will see later; it holds the
+computational power equivalent to that of the turing machine (via the church-turing thesis).</p>
+<h3 id="disclaimer">disclaimer<a href="#disclaimer" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>before we proceed, something that i should inform you of is the notation that i will be using throughout
+the rest of the post. i am not going to be strictly sticking with the syntax, and there will be slight
+deviations as i will mention now.</p>
+<ul>
+<li>when defining a lambda abstraction, i will not be using the lambda character. instead, i will be
+using haskell&rsquo;s style of defining lambda functions, and simply represent the <code>λ </code> character
+by a backslash <code>\</code>, followed by the variable.</li>
+<li>i will omit useless braces at various points within my notes if they are not necessary.</li>
+</ul>
+<h2 id="currying">currying<a href="#currying" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>as we saw from the previous bnf definition of the syntax of lambda calculus, every application must
+only contain a single variable. this means that we cannot pass more than one parameter to a function/
+abstraction within the lambda calculus.</p>
+<p>for example, here is an invalid function abstraction which performs addition.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hs" data-lang="hs"><span style="display:flex;"><span><span style="color:#a6e22e">\</span>xy<span style="color:#f92672">.</span>(x <span style="color:#f92672">+</span> y)
+</span></span></code></pre></div><p>lets curry this function and correct it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hs" data-lang="hs"><span style="display:flex;"><span><span style="color:#a6e22e">\</span>x<span style="color:#f92672">.</span>(<span style="color:#a6e22e">\</span>y<span style="color:#f92672">.</span>(x <span style="color:#f92672">+</span> y))
+</span></span></code></pre></div><p>very nice, now we have a valid abstraction.</p>
+<h2 id="free-and-bound-variables--closure--combinators">free and bound variables | closure &amp; combinators<a href="#free-and-bound-variables--closure--combinators" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>a bound variable is a variable which is declared within the current function scope.</p>
 <p>on the other hand, a free variable is a variable which utilizes a variable from a parent scope. within
 programming, this can be thought of as using a global variable, or a lambda capturing a variable from a
@@ -242,73 +281,93 @@ elaborated on within the study of combinatory logic (not to be confused with com
 <p>there is going to be a section for combinatory theory at a later point within the blog. the only thing
 we need to understand at this point is the concept of the combinator/closure, and how they relate to
 free/bound variables and higher order functions.</p>
-<h2 id="currying">currying<a href="#currying" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<p>as we saw from the previous bnf definition of the syntax of lambda calculus, every application must
-only contain a single variable. this means that we cannot pass more than one parameter to a function/
-abstraction within the lambda calculus.</p>
-<p>for example, here is an invalid function abstraction which performs addition.</p>
-<pre tabindex="0"><code>\xy.(x + y)
-</code></pre><p>lets curry this function and correct it.</p>
-<pre tabindex="0"><code>\x.(\y.(x + y))
-</code></pre><h2 id="beta-reduction">beta reduction<a href="#beta-reduction" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="beta-reduction">beta reduction<a href="#beta-reduction" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>the concept of beta reduction is simple. we simply apply a variable to an abstraction, which
 we can do simply by substituting. this is simply a fancy name for a very very well understood
 concept within the rudimentary algebras.</p>
 <p>here is a small demonstration of the beta reduction.</p>
-<pre tabindex="0"><code>(\x.x)3
-</code></pre><p>we can reduce this simply by substituting the redex by 3, which results in 3.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hs" data-lang="hs"><span style="display:flex;"><span>(<span style="color:#a6e22e">\</span>x<span style="color:#f92672">.</span>x) <span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><p>we can reduce this simply by substituting the redex by 3, which results in 3.</p>
 <pre tabindex="0"><code>3
-</code></pre><p>there are more informational demonstrations of such concept, but im too lazy to construct some
-here so if you are confused please look elsewhere or somethign.</p>
-<h2 id="evaluation-order">evaluation order<a href="#evaluation-order" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+</code></pre><p>now that was a fairly simple example of beta reduction, lets amp this up a bit and write a
+lambda abstraction which simply performs addition on the natural numbers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hs" data-lang="hs"><span style="display:flex;"><span>(<span style="color:#a6e22e">\</span>x<span style="color:#f92672">.</span>(<span style="color:#a6e22e">\</span>y<span style="color:#f92672">.</span>(x <span style="color:#f92672">+</span> y)) <span style="color:#ae81ff">10</span>) <span style="color:#ae81ff">20</span>
+</span></span></code></pre></div><p>now lets apply a beta reduction to this step by step and view the result.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hs" data-lang="hs"><span style="display:flex;"><span><span style="color:#ae81ff">1</span><span style="color:#f92672">.</span> (<span style="color:#a6e22e">\</span>x<span style="color:#f92672">.</span>(<span style="color:#a6e22e">\</span>y<span style="color:#f92672">.</span>(x <span style="color:#f92672">+</span> y)) <span style="color:#ae81ff">10</span>) <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span><span style="color:#f92672">.</span> (<span style="color:#a6e22e">\</span>y<span style="color:#f92672">.</span>(<span style="color:#ae81ff">20</span> <span style="color:#f92672">+</span> y)) <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span><span style="color:#f92672">.</span> (<span style="color:#ae81ff">20</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span><span style="color:#f92672">.</span> <span style="color:#ae81ff">30</span>
+</span></span></code></pre></div><p>as we can see, beta reduction simply means subsituting the variables within the abstractions.</p>
+<h2 id="evaluation-order--reduction-strategy">evaluation order / reduction strategy<a href="#evaluation-order--reduction-strategy" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>when applying variables to lambda abstractions, we also need to know the order in which we are
+reducing/evaluating the abstraction.</p>
+<h3 id="the-church-rosser-theorem">the church-rosser theorem<a href="#the-church-rosser-theorem" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>the church rosser theorem states that, &ldquo;when applying reduction rules to terms, the ordering in
+which the reductions are chosen does not make a difference to the eventual result&rdquo;. this theorem
+essentially states that the lambda calculus is confluent.</p>
+<p>so if the result of the abstraction is always the same, then why is the evaluation order/strategy
+significant?</p>
+<p>the church rosser theorem states that all abstractions will always evaluate to the same result
+regardless of the strategy, but something to note is the fact that not all evaluation strategies
+will result in a final outcome.</p>
+<p>so the theorem states that there is no logical fallacy within the lambda calculus, as it is
+confluent and will produce the same result after evaluation, but not all evaluation strategies
+will produce a correct result.</p>
+<p>this is where the importance of reduction strategies lie, as we must use the correct order if
+we want to produce a correct final result.</p>
+<p>here is a diagram of the proof for the theorem. this is much easier to visualize as opposed to
+the textual proof.</p>
+<p><img src="https://www.researchgate.net/profile/Christopher-Scherb/publication/327989883/figure/fig4/AS:676968160821249@1538413195115/Graphical-example-of-the-Church-Rosser-Theorem13.ppm" alt="church-rosser"></p>
+<p>this proof of the church rosser theorem directly translates to, &ldquo;if there are two distinct reductions
+or sequences of reductions that can be applied to the same term, then there exists a term that is
+reachable from both results, by applying (possibly empty) sequences of additional reductions&rdquo;.</p>
 <h2 id="beta-normal-form">beta normal form<a href="#beta-normal-form" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<p>the beta normal form simply applies to an abstraction which can not be applied by the beta reduction
-any further. fairly simple concept.</p>
 <h2 id="beta-equivalence">beta equivalence<a href="#beta-equivalence" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<p>the beta equivalence is applied to two abstractions which both have two beta normal forms which are
-directly equivalent to each other.</p>
 <h2 id="alpha-conversion">alpha conversion<a href="#alpha-conversion" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<p>the alpha conversion is something that we can apply to free variables. generally in such a small formal
-system of logic, we will indirectly encounter naming conflicts. this is where alpha conversion comes in,
-as it allows us to convert the identifier of any free variable.</p>
 <h2 id="alpha-equivalence">alpha equivalence<a href="#alpha-equivalence" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<p>alpha equivalence simply means that if the meaning of two abstractions are equivalent to each other,
-regardless of the names of the variables.</p>
 <h2 id="eta-conversion">eta conversion<a href="#eta-conversion" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<p>the eta conversion</p>
 <h2 id="eta-reduction">eta reduction<a href="#eta-reduction" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <h2 id="encoding-types">encoding types<a href="#encoding-types" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>untyped lambda calculus by itself is, as the name suggests, inherently untyped. this means that there
 are no natural numbers, booleans, strings; no types of any kind. however, we can encode types within
 the untyped formal system, which we can then use to perform calculations and logic.</p>
-<p>within the untyped lambda calculus</p>
-<h2 id="fixed-point-and-recursion">fixed point and recursion<a href="#fixed-point-and-recursion" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>within the previous demonstrations, i made extra effort in ensuring that i have explicitly specified
+that the lambda absractions that we were working with were made under the assumption of natural
+numbers.</p>
+<h3 id="church-encoding">church encoding<a href="#church-encoding" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<h4 id="church-numerals">church numerals<a href="#church-numerals" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<h4 id="church-booleans">church booleans<a href="#church-booleans" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<h4 id="church-predicates">church predicates<a href="#church-predicates" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<h4 id="church-pairs">church pairs<a href="#church-pairs" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<h4 id="church-lists">church lists<a href="#church-lists" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<h3 id="church-encoding-demo">church encoding demo<a href="#church-encoding-demo" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>i find the concept of encoding types within an untyped language particularly interesting, so i have
+decided to further demonstrate this concept by encoding each monomorphic church type within haskell;
+along with their associated operations.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hs" data-lang="hs"></code></pre></div><h3 id="scott-encoding">scott encoding<a href="#scott-encoding" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>scott encoding works under the same concept as the church encoding (which was previously demonstrated).</p>
+<h3 id="peano-numbers">peano numbers<a href="#peano-numbers" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<h2 id="combinatory-calculi">combinatory calculi<a href="#combinatory-calculi" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>combinatory calculi is rooted in the lambda calculus, but extends the system of logic by defining such
+things called combinators. we have previously touched on the concept of a combinator within a previous
+section of these notes, and the definition remains the same within combinatory calculi.</p>
+<p>as previously stated, a combinatory term is simply a function that contains no free variables.</p>
+<h2 id="the-fixed-point-theorem">the fixed point theorem<a href="#the-fixed-point-theorem" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>a fixed point of a function is a value that is mapped to itself by the function. in lambda calculus,
 the same concept applies in the sense that we can apply the same abstraction by itself, which
 ultimitely results in something known as the fixed point combinator. the fixed point combinator, also
 known as the Y combinator; is a means of defining recursion within the lambda calculus.</p>
-<p>the Y combinator can be effectively defined as follows</p>
-<pre tabindex="0"><code></code></pre><p>unnecessary braces are omitted for the sake of clarity.</p>
-<h2 id="combinatory-logic">combinatory logic<a href="#combinatory-logic" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<p>combinatory logic is rooted in the lambda calculus, but extends the system of logic by defining such
-things called combinators. we have previously touched on the concept of a combinator within a previous
-section of these notes, and the definition remains the same within combinatory logic.</p>
-<p>we think of a combinator within this system of logic as the primitive building blocks of a system of
-combinators, and we can think of the system of combinators as an equivalent to the lambda calculus. in
-this case, combinatory logic is the study of systems of combinators which are built entirely off of
-primitive combinators within the lambda calculus.</p>
-<p>as previously stated, a combinator is a function which does not use any free variables within itself.</p>
+<p>the Y combinator can be effectively defined as follows.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hs" data-lang="hs"></code></pre></div><h2 id="bohms-theorem">bohm&rsquo;s theorem<a href="#bohms-theorem" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="quasi-leftmost-reduction-theorem">quasi leftmost reduction theorem<a href="#quasi-leftmost-reduction-theorem" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="recursion-and-computation">recursion and computation<a href="#recursion-and-computation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <h2 id="curry-howard-isomorphism">curry howard isomorphism<a href="#curry-howard-isomorphism" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<p>the curry howard isomorphism is an interesting &lt;&gt; that &lt;&gt;</p>
-<h2 id="godels-incompleteness-theorem">godels incompleteness theorem<a href="#godels-incompleteness-theorem" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<h2 id="simply-typed-lambda-calculus">simply typed lambda calculus<a href="#simply-typed-lambda-calculus" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="simple-typing">simple typing<a href="#simple-typing" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <h2 id="subtyping">subtyping<a href="#subtyping" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<h2 id="recursive-types">recursive types<a href="#recursive-types" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<h2 id="system-f">system F<a href="#system-f" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<h2 id="hindley-milner-type-system">hindley milner type system<a href="#hindley-milner-type-system" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<p>the hindley milner type system is built entirey off of the system F, with a few restrictions placed on
-the programmer.</p>
-<h2 id="hindley-milner-type-inference-algorithm">hindley milner type inference algorithm<a href="#hindley-milner-type-inference-algorithm" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="recursive-typing">recursive typing<a href="#recursive-typing" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="system-f-and-polymorphism">system F and polymorphism<a href="#system-f-and-polymorphism" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="the-hindley-milner-type-system">the hindley milner type system<a href="#the-hindley-milner-type-system" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="hindley-milner-type-inference">hindley milner type inference<a href="#hindley-milner-type-inference" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>now we are treading into the territory of compiler frontend development with the type inference algorithm
 of a hindley milner type system. this is an algorithm that it utilizes within a large sum of languages,
 most notable haskell. this is only required within a statically typed language, which is a language which
