@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog</title>
+    <link>https://xcr0.github.io/</link>
+    <description>Recent content on Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>@ xcr0</copyright><atom:link href="https://xcr0.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About me</title>
+      <link>https://xcr0.github.io/about/</link>
+      <pubDate>Wed, 22 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://xcr0.github.io/about/</guid>
+      <description>Hello, I&amp;rsquo;m xcr0.
+My interests include programming, compiler theory, theoretical computer science, vulnerability research and playing CTFs.
+Feel free to look around, this site is primarily a place to store and archive challenge writeups, explanations, notes on topics I&amp;rsquo;m currently researching, or just rants.
+The following is a list of my contacts in case you would like check out some of my projects, or to reach out to me.
+Github Twitter Email PGP </description>
+      <content>&lt;p&gt;Hello, I&amp;rsquo;m xcr0.&lt;/p&gt;
+&lt;p&gt;My interests include programming, compiler theory, theoretical computer science,
+vulnerability research and playing CTFs.&lt;/p&gt;
+&lt;p&gt;Feel free to look around, this site is primarily a place to store and archive challenge writeups,
+explanations, notes on topics I&amp;rsquo;m currently researching, or just rants.&lt;/p&gt;
+&lt;p&gt;The following is a list of my contacts in case you would like check out some of my projects, or to
+reach out to me.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/xcr0&#34;&gt;Github&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://twitter.com/xcrzero&#34;&gt;Twitter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;sendto:xcrzero@gmail.com&#34;&gt;Email&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://xcr0.github.io/pgp.txt&#34;&gt;PGP&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://xcr0.github.io/notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xcr0.github.io/notes/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://xcr0.github.io/posts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xcr0.github.io/posts/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+  </channel>
+</rss>
