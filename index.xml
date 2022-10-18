@@ -8,7 +8,7 @@
     <language>en-us</language>
     <copyright>@ xcr0</copyright><atom:link href="https://xcr0.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>About me</title>
+      <title>About</title>
       <link>https://xcr0.github.io/about/</link>
       <pubDate>Wed, 22 Jun 2022 00:00:00 +0000</pubDate>
       
@@ -33,6 +33,16 @@ reach out to me.&lt;/p&gt;
 &lt;li&gt;Discord: xcr0#3373&lt;/li&gt;
 &lt;/ul&gt;
 </content>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://xcr0.github.io/notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xcr0.github.io/notes/</guid>
+      <description></description>
+      <content></content>
     </item>
     
     <item>
