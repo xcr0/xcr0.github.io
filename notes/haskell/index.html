@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>haskell notes :: Blog</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="notes on haskell" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://xcr0.github.io/notes/haskell/" />
+
+
+
+
+<link rel="stylesheet" href="https://xcr0.github.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://xcr0.github.io/assets/green.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon" href="https://xcr0.github.io/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="https://xcr0.github.io/img/favicon/green.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="https://twitter.com/xcr0/" />
+  
+    <meta name="twitter:creator" content="xcr0" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="haskell notes">
+<meta property="og:description" content="notes on haskell" />
+<meta property="og:url" content="https://xcr0.github.io/notes/haskell/" />
+<meta property="og:site_name" content="Blog" />
+
+  
+    <meta property="og:image" content="https://xcr0.github.io/img/favicon/green.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2022-10-18 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="green">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    xcr0
+  </div>
+</a>
+
+    </div>
+    
+      <div class="menu-trigger">menu</div>
+    
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/notes">Notes</a></li>
+        
+      
+        
+          <li><a href="/posts">Posts</a></li>
+        
+      
+        
+          <li><a href="/tags">Tags</a></li>
+        
+      
+      
+    
+
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/notes">Notes</a></li>
+      
+    
+      
+        <li><a href="/posts">Posts</a></li>
+      
+    
+      
+        <li><a href="/tags">Tags</a></li>
+      
+    
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://xcr0.github.io/notes/haskell/">haskell notes</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2022-10-18
+        
+      </span>
+    
+    
+      <span class="post-author">:: xcr0</span>
+    
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="https://xcr0.github.io/tags/notes/">notes</a>&nbsp;
+    
+  </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h2 id="preface">preface<a href="#preface" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>haskell is a statically typed pure functional programming language which is deeply
+rooted within category theory. the term &lsquo;pure&rsquo; in this instance relates to the fact
+that the language itself does not inherently support side effects.</p>
+<p>within imperative languages, you can declare variables which hold state within
+the program. this state can be affected by any function within the program as
+long as it resides within scope. as a result of this, if a function modifies
+any form of state whilst its executing, then it cannot be regarded as a free
+function.</p>
+<p>this is not the case for haskell, as expressions within haskell may not explicitly
+modify state (without trickery); thereby making haskell pure.</p>
+<p>as all languages need some form of achieving I/O, haskell uses the IO action, which
+is a monad which acts as an object that encapsulates a channel between the pure
+program and the real world.</p>
+<p>haskell is also statically and strongly typed, meaning that statically (types are
+declared, inferred, and checked at compile time); and strongly (operations between
+types are strongly enforced. id est you cannot add an Integer and a Float).</p>
+<p>languages such as c++ and java are also statically typed, with the exception of
+integral types, which are typically handled via implicit conversion. as a result,
+within c++ we have operator overloading, which allows us to essentially define an
+existing method (or operator) for any given type (class).</p>
+<p>in the case of c++, operators are a bit fuzzy. when performing operations on primitive
+types such as int, char et cetera, operators are not functions/methods. when applying
+&ldquo;operators&rdquo; to classes, the class must first define or overload the operator for
+each respective class. in this case, these operators will just be methods with operators
+for names.</p>
+<h2 id="laziness">laziness<a href="#laziness" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>another unique feature of haskell is its laziness.</p>
+<h2 id="polymorphism">polymorphism<a href="#polymorphism" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>parametric and ad-hoc / bounded polymorphism within haskell.</p>
+<h2 id="functors">functors<a href="#functors" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>next up are functors, this allows for the generic mapping across all data types
+(computational contexts) which inherit or define an instance of the functor type
+class.</p>
+<p>first, lets map a function over any random list.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hs" data-lang="hs"><span style="display:flex;"><span><span style="color:#a6e22e">map</span> (<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>]
+</span></span></code></pre></div><p>and that works properly right? well what about when we try mapping over another container?
+lets try this on the Maybe data type.</p>
+<pre tabindex="0"><code>map (+1) (Just 1)
+</code></pre><p>as we can see, this fails, giving us an error which states that the map function
+expected a different type. we have a few ways of going about mapping across our Maybe
+type now. we could technically just rewrite the map function to map over each
+and every single type we declare, but that would be far too tedious. instead, we can
+use functors as a generic means of mapping over types.</p>
+<p>the following is the definition of the functor type class.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hs" data-lang="hs"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#66d9ef">Functor</span> f <span style="color:#66d9ef">where</span>
+</span></span><span style="display:flex;"><span>  fmap <span style="color:#f92672">::</span> (a <span style="color:#f92672">-&gt;</span> b) <span style="color:#f92672">-&gt;</span> f a <span style="color:#f92672">-&gt;</span> f b
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- map definition</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- it may help to look at the definition of map, which is a function which only allows us</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- to map across lists.</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">map</span> <span style="color:#f92672">::</span> (a <span style="color:#f92672">-&gt;</span> b) <span style="color:#f92672">-&gt;</span> [a] <span style="color:#f92672">-&gt;</span> [b]
+</span></span></code></pre></div><p>as we can see, the functor typeclass has one method named fmap. lets see an example of
+how this may be used within something like the Maybe functor. the first argument for
+fmap takes a function which we want to map across the data type (context). in this
+case, the function type must be (a -&gt; b), taking one argument of type a and returning a
+result of type b.</p>
+<p>the next argument it takes is the an instance of the functor type, or computational
+context to apply the function to. and as a result, it returns a new instance of a
+functor containing type b.</p>
+<p>looking at the definiton of map, we can draw some similarities. in the case of the
+map function, the &ldquo;functor instance&rdquo; or computational context is the list, which
+wraps both types of a and b.</p>
+<p>now lets look at the definition for the maybe instance. it will simply overload the
+functor method and apply the function with the value inside each context.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hs" data-lang="hs"><span style="display:flex;"><span><span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">Functor</span> <span style="color:#66d9ef">Maybe</span> <span style="color:#66d9ef">where</span>
+</span></span><span style="display:flex;"><span>  fmap f <span style="color:#66d9ef">Nothing</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">Nothing</span>
+</span></span><span style="display:flex;"><span>  fmap f (<span style="color:#66d9ef">Just</span> x) <span style="color:#f92672">=</span> <span style="color:#66d9ef">Just</span> (f x)
+</span></span></code></pre></div><p>lets now put this into practice and write a binary search tree.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hs" data-lang="hs"><span style="display:flex;"><span><span style="color:#66d9ef">data</span> <span style="color:#66d9ef">Tree</span> a
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">=</span> <span style="color:#66d9ef">Node</span> a (<span style="color:#66d9ef">Tree</span> a) (<span style="color:#66d9ef">Tree</span> a)
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span> <span style="color:#66d9ef">Leaf</span> a
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span> <span style="color:#66d9ef">Empty</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">deriving</span> (<span style="color:#66d9ef">Eq</span>, <span style="color:#66d9ef">Show</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">Functor</span> <span style="color:#66d9ef">Node</span> <span style="color:#66d9ef">where</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">-- fmap :: (a -&gt; b) -&gt; Node a -&gt; Node b</span>
+</span></span><span style="display:flex;"><span>  fmap f (<span style="color:#66d9ef">Node</span> x l r) <span style="color:#f92672">=</span> <span style="color:#66d9ef">Node</span> (f x) (fmap f l) (fmap f r)
+</span></span><span style="display:flex;"><span>  fmap f (<span style="color:#66d9ef">Leaf</span> x) <span style="color:#f92672">=</span> <span style="color:#66d9ef">Leaf</span> (f x)
+</span></span><span style="display:flex;"><span>  fmap <span style="color:#66d9ef">_</span> <span style="color:#66d9ef">Empty</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">Empty</span>
+</span></span></code></pre></div><p>starting off we have defined the type for our tree, as well as the functor
+instance. lets now work towards writing actual functions which allow us to
+operate on and mutate our tree.</p>
+<p>functor laws.</p>
+<h2 id="applicative">applicative<a href="#applicative" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>applicatives for mapping functions which take more than one argument.</p>
+<p>applicative laws</p>
+<h2 id="monoid">monoid<a href="#monoid" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>associativity and identity</p>
+<p>monoid laws</p>
+<h2 id="monad">monad<a href="#monad" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>monad laws</p>
+<h2 id="readerwriter-monads">reader/writer monads<a href="#readerwriter-monads" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="state-monad">state monad<a href="#state-monad" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="monad-transformers">monad transformers<a href="#monad-transformers" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="monadic-parsing">monadic parsing<a href="#monadic-parsing" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="zippers">zippers<a href="#zippers" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="lenses">lenses<a href="#lenses" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="comonads">comonads<a href="#comonads" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="continuation-monad">continuation monad<a href="#continuation-monad" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="continuation-passing-style">continuation passing style<a href="#continuation-passing-style" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="concurrency">concurrency<a href="#concurrency" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="generalized-algebraic-data-types">generalized algebraic data types<a href="#generalized-algebraic-data-types" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+
+      </div></div>
+
+  
+
+  
+  
+
+  
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>@ xcr0</span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://xcr0.github.io/assets/main.js"></script>
+<script src="https://xcr0.github.io/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

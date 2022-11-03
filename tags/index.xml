@@ -6,6 +6,17 @@
     <description>Recent content in Tags on Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>@ xcr0</copyright><atom:link href="https://xcr0.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>@ xcr0</copyright>
+    <lastBuildDate>Tue, 18 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://xcr0.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>notes</title>
+      <link>https://xcr0.github.io/tags/notes/</link>
+      <pubDate>Tue, 18 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://xcr0.github.io/tags/notes/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
   </channel>
 </rss>
